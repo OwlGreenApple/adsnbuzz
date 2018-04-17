@@ -19,6 +19,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Link Icon -->
+    <link rel='shortcut icon' type='image/png' href='icon.png'>
+    <style type="text/css">
+        .bg_login {
+            background-image: url('ads&buzz home image 60 ocp.jpg');
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -34,12 +45,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="{{ url('/') }}">Home</a></li>
                         <!-- Authentication Admin login redirect menu admin -->
                         @guest
                         @else 
+                            <li><a href="{{ url('/') }}">Home</a></li>
                             @if (Auth::user()->admin == 1)
-                                <li><a href="">Konfirmasi</a></li>
+                                <li><a href="">Confirm Payment</a></li>
+                                <li><a href="">Reports</a></li>
+                            @else 
+                                <li><a href="{{ url('/order') }}">Order</a></li>
+                                <li><a href="">Confirm Payment</a></li>
+                                <li><a href="">Reports</a></li>
                             @endif
                         @endguest
                     </ul>

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Ads&Buzz'),
 
     /*
     |--------------------------------------------------------------------------
@@ -154,11 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        AdsnBuzz\Providers\AppServiceProvider::class,
+        AdsnBuzz\Providers\AuthServiceProvider::class,
+        // AdsnBuzz\Providers\BroadcastServiceProvider::class,
+        AdsnBuzz\Providers\EventServiceProvider::class,
+        AdsnBuzz\Providers\RouteServiceProvider::class,
 
     ],
 
