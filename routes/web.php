@@ -31,6 +31,8 @@ Route::group(['middleware' => ['web','auth']], function() {
 			return view('user_home');
 		}
 	});
+	Route::get('/order','OrderController@index');
+	Route::post('/order/{id}','OrderController@store');
 });
 
 Route::get('admin', ['middleware' => ['web','auth','admin'], function() {
@@ -41,4 +43,3 @@ Route::get('/password/reset/{id}', function() {
 	return view('auth.password.reset');
 });
 
-Route::get('/order','OrderController@index');
