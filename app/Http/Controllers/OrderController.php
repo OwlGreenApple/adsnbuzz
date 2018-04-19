@@ -21,6 +21,6 @@ class OrderController extends Controller
     	$jml_order = $request->input('jml_order');
     	$opsibayar = $request->input('opsibayar');
 		DB::insert('insert into orders (id,tgl_order,jml_order,opsibayar,konfirmasi) values(?,NOW(),?,?,0)',[$id,$jml_order,$opsibayar]);
-		return "Order berhasil disimpan.";
+		return "Order berhasil disimpan.<br> Silahkan melakukan pembayaran terlebih dahulu.";
     }
 }

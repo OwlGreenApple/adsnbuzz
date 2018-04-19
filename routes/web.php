@@ -43,3 +43,7 @@ Route::get('/password/reset/{id}', function() {
 	return view('auth.password.reset');
 });
 
+Route::get('/coba',function() {
+	return view('coba');
+});
+
