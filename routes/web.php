@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web','auth']], function() {
 	});
 	Route::get('/order','OrderController@index');
 	Route::post('/order/{id}','OrderController@store');
+	Route::post('/calc-coupon','OrderController@calc_coupon');
 });
 
 Route::get('admin', ['middleware' => ['web','auth','admin'], function() {

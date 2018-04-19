@@ -14,6 +14,25 @@ function sendData(){
 		}
 	});
 }
+function calcCoupon(){
+	$.ajax({
+		type : 'POST',
+		url : "{{url('/calc-coupon')}}",
+		data : $('form').serialize(),
+		dataType: 'text',
+		success: function(response) {
+			var data = jQuery.parseJSON(response);
+			if(data.type=='found') {
+				console.log("a");
+				$("#total-price").html(parseInt($("#jml-order").val()) - parseInt(data.value));
+			}
+			else if(data.type=='not-found') {
+				console.log("b");
+			}
+			// console.log(response);
+		}
+	});
+}
 </script>
 
 <div class="container">
@@ -27,16 +46,16 @@ function sendData(){
                     	@csrf
                         <div class="form-group row">
                             <label for="jml_order" class="col-sm-4 text-md-right"> Jumlah Order </label>
-                            <select class="form-control col-md-4" name="jml_order">
+                            <select class="form-control col-md-4" name="jml_order" id="jml-order">
                             	<option>--Pilih Jumlah Order--</option>
-        						<option>5 juta</option>
-						        <option>10 juta</option>
-						        <option>15 juta</option>
-						        <option>20 juta</option>
-						        <option>25 juta</option>
-						        <option>50 juta</option>
-						        <option>100 juta</option>
-      						</select>
+															<option value="5000000">5 juta</option>
+															<option value="10000000">10 juta</option>
+															<option value="15000000">15 juta</option>
+															<option value="20000000">20 juta</option>
+															<option value="25000000">25 juta</option>
+															<option value="50000000">50 juta</option>
+															<option value="100000000">100 juta</option>
+														</select>
                         </div>
                 
 
@@ -44,14 +63,25 @@ function sendData(){
                             <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Opsi Pembayaran </label>
                             <select class="form-control col-md-4" name="opsibayar">
                             	<option>--Pilih Opsi Pembayaran--</option>
-        						<option>Transfer Bank</option>
-						        <option>Credit Card</option>
-      						</select>  
+															<option>Transfer Bank</option>
+															<option>Credit Card</option>
+														</select>  
                         </div>
 
+                        <div class="form-group row">
+                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Kode kupon</label>
+														<input type="text" class="form-control col-md-4" name="coupon_code">
+														&nbsp
+														<button type="button" class="btn btn-primary" onclick="calcCoupon()"> Calculate </button>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Total Price</label>
+														<span id="total-price"></span>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" onclick="sendData()"> Order </button>
+                                <button type="button" class="btn btn-primary" onclick="sendData()"> Order </button>
                             </div>
                         </div>
 
