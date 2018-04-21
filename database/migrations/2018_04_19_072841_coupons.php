@@ -15,7 +15,7 @@ class Coupons extends Migration
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->string('kodekupon');
-            $table->integer('diskon');
+            $table->double('diskon');
         });
     }
 

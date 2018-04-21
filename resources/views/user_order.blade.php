@@ -9,8 +9,11 @@ function sendData(){
 		type : 'POST',
 		url : "{{url('/order/'.Auth::user()->id)}}",
 		data : $('form').serialize(),
+		dataType : 'text',
 		success: function(response) {
 			console.log("success");
+			$("#isiform").hide();
+			$('#pesan').html("Order Telah Tersimpan. <br> Silahkan lakukan pembayaran terlebih dahulu.");
 		}
 	});
 }
@@ -29,13 +32,12 @@ function calcCoupon(){
 			else if(data.type=='not-found') {
 				console.log("b");
 			}
-			// console.log(response);
 		}
 	});
 }
 </script>
 
-<div class="container">
+<div class="container" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -61,7 +63,7 @@ function calcCoupon(){
 
                         <div class="form-group row">
                             <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Opsi Pembayaran </label>
-                            <select class="form-control col-md-4" name="opsibayar">
+                            <select class="form-control col-md-4" name="opsibayar" id="opsi-bayar">
                             	<option>--Pilih Opsi Pembayaran--</option>
 															<option>Transfer Bank</option>
 															<option>Credit Card</option>
@@ -76,7 +78,7 @@ function calcCoupon(){
                         </div>
 
                         <div class="form-group row">
-                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Total Price</label>
+                            <label for="total-price" class="col-md-4 col-form-label text-md-right"> Total Price</label>
 														<span id="total-price"></span>
                         </div>
                         <div class="form-group row mb-0">
@@ -90,6 +92,12 @@ function calcCoupon(){
             </div>
         </div>
     </div>
+</div>
+
+<div class = "container"> 
+	 <div class="row justify-content-center">
+	 	<span align="center" id="pesan"></span>
+	 </div>
 </div>
 @endguest
 @endsection

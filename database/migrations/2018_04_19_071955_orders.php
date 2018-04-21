@@ -17,7 +17,7 @@ class Orders extends Migration
             $table->bigInteger('id');
             $table->string('kodekupon');
             $table->timestamp('tgl_order');
-            $table->string('jml_order');
+            $table->double('jml_order');
             $table->string('opsibayar');
             $table->string('buktibayar');
             $table->boolean('konfirmasi')->default(0);

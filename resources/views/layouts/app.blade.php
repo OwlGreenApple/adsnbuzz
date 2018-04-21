@@ -9,6 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+     <!-- Link Icon -->
+    <link rel='shortcut icon' type='image/png' href='icon.png'>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,8 +22,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Link Icon -->
-    <link rel='shortcut icon' type='image/png' href='icon.png'>
+   
     <style type="text/css">
         .bg_login {
             background-image: url('ads&buzz home image 60 ocp.jpg');
