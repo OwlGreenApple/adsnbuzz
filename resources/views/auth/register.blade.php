@@ -34,7 +34,6 @@
             top :100px;
             top:50%;
             margin-top: -170px;
-            opacity: 0.7;
         }
         .fonthead {
             color:white;
@@ -46,15 +45,16 @@
             color:white;
             font-family: Arial;
         }
-        .fontreg{
-            color:white;
-            font-family: Arial;
-            font-weight: bold;
+        body {
+            background-color: #cccccc;
+            background-image:url('ads&buzz home image 60 ocp.jpg');/*your background image*/  
+            background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
+            background-size:cover;
         }
     </style>
 
 </head>
-<body background="ads&buzz home image 60 ocp.jpg">
+<body>
     <!--img class="box" src="loginbox.png" align="right"/-->
     <div class="container">
         <div class="row">
