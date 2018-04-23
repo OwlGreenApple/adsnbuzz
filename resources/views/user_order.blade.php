@@ -50,14 +50,14 @@ function calcCoupon(){
                             <label for="jml_order" class="col-sm-4 text-md-right"> Jumlah Order </label>
                             <select class="form-control col-md-4" name="jml_order" id="jml-order">
                             	<option>--Pilih Jumlah Order--</option>
-															<option value="5000000">5 juta</option>
-															<option value="10000000">10 juta</option>
-															<option value="15000000">15 juta</option>
-															<option value="20000000">20 juta</option>
-															<option value="25000000">25 juta</option>
-															<option value="50000000">50 juta</option>
-															<option value="100000000">100 juta</option>
-														</select>
+								<option value="5000000">5 juta</option>
+								<option value="10000000">10 juta</option>
+								<option value="15000000">15 juta</option>
+								<option value="20000000">20 juta</option>
+								<option value="25000000">25 juta</option>
+								<option value="50000000">50 juta</option>
+								<option value="100000000">100 juta</option>
+							</select>
                         </div>
                 
 

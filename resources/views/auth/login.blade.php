@@ -21,54 +21,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style type="text/css">
-        .balon {
-            position: relative;
-            top:50%;
-            margin-top: -50px;
-            max-width: 80%;
-            height: auto;
-        }
-        .loginbox {
-            position: relative;
-            top :100px;
-            top:50%;
-            margin-top: -50px;
-        }
-        .fonthead {
-            color:white;
-            font-size: 20px;
-            font-family: Arial;
-            font-weight: bold;
-        }
-        .fontputih{
-            color:white;
-            font-family: Arial;
-        }
-        .fontreg{
-            color:white;
-            font-family: Arial;
-            font-weight: bold;
-        }
-        body {
-            background-color: #cccccc;
-            background-image:url('ads&buzz home image 60 ocp.jpg');/*your background image*/  
-            background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
-            background-size:cover;
-        }
-    </style>
+    <link href="{{ asset('css/loginregis.css') }}" rel="stylesheet">
 
 </head>
-<body background="ads&buzz home image 60 ocp.jpg">
-    <!--img class="box" src="loginbox.png" align="right"/-->
+<body>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <img class="balon" src="balon.png" />  
             </div>
 
-            <div class="col-md-5 offset-md-1">
-                <div class="card text-white bg-dark loginbox">
+            <div class="col-md-6">
+                <div class="card bg-dark loginbox">
                     <div class="card-header fonthead" align="center">LOGIN</div>
 
                     <div class="card-body">
@@ -76,7 +40,7 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="email" class="fontputih">Email</label>
+                                <label for="email" class="fontputih">E-mail</label>
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
@@ -104,12 +68,12 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="offset-md-3">
-                                    <button type="submit" class="col-md-8 btn btn-primary fonthead"> Masuk </button>
+                                <div align="center">
+                                    <button type="submit" class="col-md-6 btn btn-primary fonthead"> Masuk </button>
                                 </div>
                             </div>
 
-                            <div class="form-group offset-md-4">
+                            <div class="form-group" align="center">
                                  <p class="fontputih">or <a href="{{ route('register') }}" class="fontreg">Register Now</a></p>
                             </div>
                         </form>

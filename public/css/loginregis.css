@@ -1,0 +1,45 @@
+        body {
+            background-color: #cccccc;
+            background-image:url('../ads&buzz home image 60 ocp.jpg');
+            background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
+            background-size:cover;
+        }
+        .balon {
+            display: block;
+            position: relative;
+            top: 20%;
+            margin: auto;
+            margin-bottom: 25%;
+            max-width: 80%;
+        }
+        .loginbox {
+            display: block;
+            position: relative;
+            top: 20%;
+            margin: auto;
+            margin-bottom: 10%;
+            max-width: 70%;
+        }
+        .regbox {
+            display: block;
+            position: relative;
+            top: 10%;
+            margin: auto;
+            margin-bottom: 10%;
+            max-width: 70%;
+        }
+        .fonthead {
+            color:white;
+            font-size: 20px;
+            font-family: Arial;
+            font-weight: bold;
+        }
+        .fontputih{
+            color:white;
+            font-family: Arial;
+        }
+        .fontreg{
+            color:white;
+            font-family: Arial;
+            font-weight: bold;
+        }

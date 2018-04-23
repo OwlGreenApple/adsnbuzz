@@ -21,49 +21,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style type="text/css">
-        .balon {
-            position: relative;
-            top:50%;
-            margin-top: -80px;
-            max-width: 80%;
-            height: auto;
-        }
-        .loginbox {
-            position: relative;
-            top :100px;
-            top:50%;
-            margin-top: -170px;
-        }
-        .fonthead {
-            color:white;
-            font-size: 20px;
-            font-family: Arial;
-            font-weight: bold;
-        }
-        .fontputih{
-            color:white;
-            font-family: Arial;
-        }
-        body {
-            background-color: #cccccc;
-            background-image:url('ads&buzz home image 60 ocp.jpg');/*your background image*/  
-            background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
-            background-size:cover;
-        }
-    </style>
+    <link href="{{ asset('css/loginregis.css') }}" rel="stylesheet">
 
 </head>
 <body>
-    <!--img class="box" src="loginbox.png" align="right"/-->
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <img class="balon" src="balon.png" />  
             </div>
 
-            <div class="col-md-5 offset-md-1">
-                <div class="card text-white bg-dark loginbox">
+            <div class="col-md-6">
+                <div class="card bg-dark regbox">
                     <div class="card-header fonthead" align="center">REGISTER</div>
 
                     <div class="card-body">
@@ -110,17 +79,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="fontputih"> Privileges </label>
-                                <select class="form-control" name="admin">
-                                    <option>--Pilih Hak Akses--</option>
-                                    <option value="1">Admin</option>
-                                    <option value="0">User</option>
-                                </select>
+                                <a href="{{ route('login') }}" class="fontputih">
+                                    Already have account?
+                                </a>
                             </div>
 
                             <div class="form-group">
-                                <div class="offset-md-3">
-                                    <button type="submit" class="col-md-8 btn btn-primary fonthead"> Daftar </button>
+                                <div align="center">
+                                    <button type="submit" class="col-md-6 btn btn-primary fonthead"> Daftar </button>
                                 </div>
                             </div>
                         </form>
