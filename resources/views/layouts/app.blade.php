@@ -57,7 +57,7 @@
                             @else 
                                 <li><a href="{{ url('/order') }}">Order</a></li>
                                 <li><a href="">Confirm Payment</a></li>
-                                <li><a href="">Reports</a></li>
+                                <li><a href="{{ url('/report-user') }}">Reports</a></li>
                             @endif
                         @endguest
                     </ul>
