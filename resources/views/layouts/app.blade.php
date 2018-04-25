@@ -23,15 +23,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
    
-    <style type="text/css">
-        .bg_login {
-            background-image: url('ads&buzz home image 60 ocp.jpg');
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
@@ -54,6 +45,7 @@
                             @if (Auth::user()->admin == 1)
                                 <li><a href="">Confirm Payment</a></li>
                                 <li><a href="{{ url('/report') }}">Reports</a></li>
+                                <li><a href="{{ url('/coupon') }}">Insert Coupon</a></li>
                             @else 
                                 <li><a href="{{ url('/order') }}">Order</a></li>
                                 <li><a href="">Confirm Payment</a></li>

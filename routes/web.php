@@ -38,6 +38,8 @@ Route::group(['middleware' => ['web','auth']], function() {
 	Route::post('/report/save','ReportController@savecsv');
 	Route::get('/report-user','ReportController@user_index');
 	Route::post('/report-user/{id}','ReportController@showData');
+	Route::get('/coupon','CouponController@index');
+	Route::post('/coupon/insert','CouponController@store');
 });
 
 Route::get('admin', ['middleware' => ['web','auth','admin'], function() {

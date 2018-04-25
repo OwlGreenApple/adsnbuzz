@@ -57,18 +57,18 @@ class ReportController extends Controller
 
     public function showData(Request $request, $id){
     	//dd($request->tglmulai);
-    	$data = Report::where("report_starts",$request->tglmulai)->get();
+    	$data = Report::where("user_id",$id)
+    					->where("report_starts",$request->tglmulai)
+    				    ->where("report_ends",$request->tglakhir)->get();
     	//dd($data);
-    	if (is_null($data)){
-			$arr["value"] = "";
-			$arr['type'] = 'not-found';
+    	if ($data->isEmpty()){
+			$arr["status"] = 'not-found';
+			$arr['isi'] = "";
 			return $arr;    
 		}
 		else {
-			//dd('ada data');
-			
-			$arr["value"] = "";
-			$arr['type'] = 'found';
+			$arr["status"] = 'found';
+			$arr['isi'] = $data;
 			return $arr;    
 		}
     }
