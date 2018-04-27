@@ -36,6 +36,7 @@ Route::group(['middleware' => ['web','auth']], function() {
 	Route::post('/calc-coupon','OrderController@calc_coupon');
 	Route::get('/report-user','ReportController@user_index');
 	Route::post('/report-user/{id}','ReportController@showData');
+	Route::post('/pesan/{id}','OrderController@pesan');
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {

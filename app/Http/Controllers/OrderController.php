@@ -29,8 +29,7 @@ class OrderController extends Controller
     	$order->save();
 
     	$user = User::find($id);
-    	$user->deposit = $user->deposit + $request->totalprice;
-    	dd($request->totalprice);
+    	$user->deposit = $user->deposit + $request->jml_order;
     	$user->save();
     }
 		
@@ -47,6 +46,18 @@ class OrderController extends Controller
 			$arr['status'] = 'found';
 			$arr['tipe'] = $coupon->tipekupon;
 			return $arr;    
+		}
+	}
+
+	public function pesan(Request $request,$id){
+		$user = User::find($id);
+
+		if($request->spend > $user->deposit){
+			return "invalid";
+		} else {
+			$user->deposit = $user->deposit - $request->spend;
+			$user->save();
+			return "valid";
 		}
 	}
 }
