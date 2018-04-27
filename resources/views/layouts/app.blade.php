@@ -45,7 +45,7 @@
                             @if (Auth::user()->admin == 1)
                                 <li><a href="">Confirm Payment</a></li>
                                 <li><a href="{{ url('/report') }}">Reports</a></li>
-                                <li><a href="{{ url('/coupon') }}">Insert Coupon</a></li>
+                                <li><a href="{{ url('/coupon') }}">Coupon</a></li>
                             @else 
                                 <li><a href="{{ url('/order') }}">Order</a></li>
                                 <li><a href="">Confirm Payment</a></li>

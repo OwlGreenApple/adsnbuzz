@@ -27,7 +27,6 @@ class ReportController extends Controller
 
     public function savecsv(Request $request){
     	if($request->hasFile('filecsv')){
-    		echo "dataaa1";
     		//dd($request->file('filecsv'));
 			$path = $request->file('filecsv')->getRealPath();
 			$data = Excel::load($path)->get();

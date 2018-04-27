@@ -34,17 +34,15 @@ Route::group(['middleware' => ['web','auth']], function() {
 	Route::get('/order','OrderController@index');
 	Route::post('/order/{id}','OrderController@store');
 	Route::post('/calc-coupon','OrderController@calc_coupon');
-	Route::get('/report','ReportController@index');
-	Route::post('/report/save','ReportController@savecsv');
 	Route::get('/report-user','ReportController@user_index');
 	Route::post('/report-user/{id}','ReportController@showData');
-	Route::get('/coupon','CouponController@index');
-	Route::post('/coupon/insert','CouponController@store');
 });
 
-Route::get('admin', ['middleware' => ['web','auth','admin'], function() {
-	return view('admin/admin_home');
-}]);
+Route::group(['middleware' => ['web','auth','admin']], function() {
+	Route::resource('coupon','CouponController');
+	Route::get('/report','ReportController@index');
+	Route::post('/report/save','ReportController@savecsv');
+});
 
 Route::get('/password/reset/{id}', function() {
 	return view('auth.password.reset');

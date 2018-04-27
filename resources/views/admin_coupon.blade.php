@@ -1,37 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+    function deleteData(id,row){
+        if(confirm("Are you sure want to delete?")) {
+            $.ajax({
+                    type : 'DELETE',
+                    url : "<?php echo url('/coupon'); ?>"+'/'+id,
+                    data: { "_token": "{{ csrf_token() }}" },
+                    //dataType : 'text',
+                    success: function(response) {
+                        console.log("success");
+                        $("#pesan").addClass("alert alert-success alert-dismissible");
+                        $("#pesan").append('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>');
+                        $('#pesan').html("Kupon berhasil dihapus.");
+                        
+                        var el = row.parentNode.parentNode.rowIndex;
+                        document.getElementById("tabelkupon").deleteRow(el);
+                    }
+            });
+        }
+    }
+</script>
 <div class="container" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Insert Coupon</div>
+                <div class="card-header">Coupon Management</div>
 
                 <div class="card-body">
-                    <form action="{{url('/coupon/insert')}}" method="post">
-                    	@csrf
-                        <div class="form-group row">
-                            <label for="kodekupon" class="col-md-4 text-md-right"> Kode Kupon </label>
-                            <input type="text" class="form-control col-md-4" name="kodekupon">
-                        </div>
-                        
-                        <div class="form-group row">
-                            <label for="tipekupon" class="col-md-4 text-md-right"> Tipe Kupon </label>
-                            <select class="form-control col-md-4" name="tipekupon">
-                            	<option>Nominal</option>
-                                <option>Persen</option>
-							</select>
-                        </div>
-                
-                        <div class="form-group row">
-                            <label for="diskon" class="col-md-4 col-form-label text-md-right"> Diskon </label>
-                            <input type="text" class="form-control col-md-4" name="diskon">
-                        </div>
+                    <div class="tomboltambah" style="margin-bottom: 20px;">
+                        <a class="btn btn-primary" href="{{url('/coupon/create')}}">Tambah</a>
+                    </div>
 
-                        <div class="form-group" align="center">
-                            <button type="submit" class="btn btn-primary"> Tambah </button>
-                        </div>
-                    </form>
+                    <div class="tabel">
+                        <table class="table table-striped table-bordered" id="tabelkupon">
+                            <thead style="text-align: center;">
+                                <tr>
+                                    <th>Kode Kupon</th>
+                                    <th>Diskon</th>
+                                    <th>Tipe Diskon</th>
+                                    <th colspan="2">Edit</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($coupons as $coupon)
+                                    <tr>
+                                        <td>{{ $coupon->kodekupon }}</td>
+                                        <td>{{ $coupon->diskon }}</td>
+                                        <td>{{ $coupon->tipekupon }}</td>
+                                        <td align="center"><form action="{{ url('/coupon/'.$coupon->id.'/edit') }}"><button class="btn btn-primary">Update</form></td>
+                                        <td align="center"><button class="btn btn-danger" onclick="deleteData({{ $coupon->id }},this)">Delete</form></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>    
+                    </div>
+                    <?php echo $coupons->render(); ?> 
+
+                    <div id="pesan">
+                        
+                    </div>
                 </div>       
             </div>
         </div>

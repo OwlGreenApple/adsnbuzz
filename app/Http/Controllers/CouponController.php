@@ -8,39 +8,50 @@ use AdsnBuzz\Coupon;
 class CouponController extends Controller
 {
     public function index(){
-    	return view('admin_coupon');
+    	$coupons = Coupon::paginate(10);
+       	return view('admin_coupon')
+       	       ->with('coupons',$coupons);
+    }
+
+    public function create(){
+    	return view('insertcoupon');
     }
 
     public function store(Request $request){
     	if($request->tipekupon=='Persen' && $request->diskon>100){
-    		dd('Input diskon terlalu besar. Masukkan angka antara 0 sampai 100.');
+    		return 'not-valid';
     	} else {
     		$kupon 				= new Coupon;
 	    	$kupon->kodekupon 	= $request->kodekupon;
 	    	$kupon->tipekupon	= $request->tipekupon;
 	    	$kupon->diskon		= $request->diskon;
 	    	$kupon->save();
-	    	dd('Insert kupon berhasil');
     	}
     }
 
-    public function create(){
+    public function show($id){
 
     }
 
-    public function show(){
-
+    public function edit($id){
+		$coupon = Coupon::find($id);
+		return view('editcoupon') -> with('coupon',$coupon);
     }
 
-    public function edit(){
-
+    public function update(Request $request, $id){
+    	if($request->tipekupon=='Persen' && $request->diskon>100) {
+    		return 'not-valid';
+    	} else {
+    		$coupon = Coupon::find($id);
+	    	$coupon->kodekupon 	= $request->kodekupon;
+	    	$coupon->tipekupon 	= $request->tipekupon;
+	    	$coupon->diskon		= $request->diskon;
+	    	$coupon->save();
+    	}
     }
 
-    public function update(){
-
-    }
-
-    public function destroy(){
-
+    public function destroy($id){
+    	$coupon = Coupon::find($id);
+        $coupon->delete();
     }
 }

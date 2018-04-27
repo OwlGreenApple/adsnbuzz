@@ -14,8 +14,10 @@ class Coupons extends Migration
     public function up()
     {
         Schema::create('coupons', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('kodekupon');
             $table->double('diskon');
+            $table->string('tipekupon');
         });
     }
 

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'puspitanurhidayati@gmail.com',
             'password' => bcrypt('cobadeh'),
             'admin' => 0,
+            'deposit' => 0,
         ]);
     }
 }

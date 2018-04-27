@@ -25,11 +25,15 @@ function calcCoupon(){
 		dataType: 'text',
 		success: function(response) {
 			var data = jQuery.parseJSON(response);
-			if(data.type=='found') {
-				console.log("a");
-				$("#total-price").html(parseInt($("#jml-order").val()) - parseInt(data.value));
+			if(data.status=='found') {
+				if(data.tipe=='Nominal'){
+					console.log("a");
+					$("#total-price").html(parseInt($("#jml-order").val()) - parseInt(data.value));
+				} else {
+					$("#total-price").html(parseInt($("#jml-order").val()) * (parseInt(data.value)/100));
+				}
 			}
-			else if(data.type=='not-found') {
+			else if(data.status=='not-found') {
 				console.log("b");
 			}
 		}
@@ -79,7 +83,7 @@ function calcCoupon(){
 
                         <div class="form-group row">
                             <label for="total-price" class="col-md-4 col-form-label text-md-right"> Total Price</label>
-														<span id="total-price"></span>
+														<span id="total-price" name="totalprice"></span>
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

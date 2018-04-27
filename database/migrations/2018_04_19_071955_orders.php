@@ -14,12 +14,13 @@ class Orders extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id');
             $table->string('kodekupon');
             $table->timestamp('tgl_order');
             $table->double('jml_order');
             $table->string('opsibayar');
-            $table->string('buktibayar');
+            $table->string('buktibayar')->nullable();
             $table->boolean('konfirmasi')->default(0);
         });
     }
