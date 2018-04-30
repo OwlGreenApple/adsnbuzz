@@ -14,12 +14,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
+    <link href="{{ asset('selectize/selectize.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
-    
-    <script src="{{ asset('js/selectize.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('selectize/selectize.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
