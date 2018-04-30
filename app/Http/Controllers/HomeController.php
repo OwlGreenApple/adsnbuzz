@@ -3,6 +3,8 @@
 namespace AdsnBuzz\Http\Controllers;
 
 use Illuminate\Http\Request;
+use AdsnBuzz\User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(Auth::check()){
+            if(Auth::user()->admin == 1){
+                return view('admin_home');
+            } else {
+                $user = User::find(Auth::user()->id);
+                return view('user_home')->with('user',$user);
+            }
+        }
     }
 }

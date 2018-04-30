@@ -24,13 +24,7 @@ Route::group(['middleware' => 'web'], function(){
 
 Route::group(['middleware' => ['web','auth']], function() {
 	Route::get('/home','HomeController@index');
-	Route::get('/', function(){
-		if(Auth::user()->admin == 1){
-			return view('admin_home');
-		} else {
-			return view('user_home');
-		}
-	});
+	Route::get('/', 'HomeController@index');
 	Route::get('/order','OrderController@index');
 	Route::post('/order/{id}','OrderController@store');
 	Route::post('/calc-coupon','OrderController@calc_coupon');

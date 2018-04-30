@@ -36,15 +36,18 @@
             }
         });
 
-        //var tags = "foo;fii;cobaa".split(";");
-
         var selectize_tags = $("#companycategory")[0].selectize
             selectize_tags.addOption({text:'foo', value: 'foo'});
             selectize_tags.addOption({text:'fii', value: 'fii'});
             selectize_tags.addOption({text:'doo', value: 'doo'});
 
-            //selectize_tags.setValue(tags);
-        
+        var tags = "{{$user->companycategory}}".split(";");
+        if(tags!=""){
+            for (var i = 0, n = tags.length; i < n; i++) {
+                selectize_tags.addOption({ text: tags[i], value:tags[i] });
+            }
+            selectize_tags.setValue(tags);
+        }
     });
 </script>
 
@@ -57,21 +60,20 @@
                         @csrf
                         <div class="form-group row">
                             <label for="spend" class="col-md-3 text-md-right"> Spend </label>
-                            <input type="text" class="form-control col-md-6" name="spend">
+                            <input type="text" class="form-control col-md-6" name="spend" style="margin-left: 13px;">
                         </div>
                 
 
                         <div class="form-group row">
                             <label for="opsibayar" class="col-md-3 col-form-label text-md-right"> Company Category </label>
-                            <textarea class="col-md-6" id="companycategory" name="companycategory"> </textarea>
+                            <textarea class="col-md-6" id="companycategory" name="companycategory" placeholder="Categories of your company..."> </textarea>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-4 offset-md-4">
+                        <div align="center">
+                            <div>
                                 <button type="button" class="btn btn-primary" onclick="pesan()"> Pesan </button>
                             </div>
                         </div>
-
                     </form>
                 </div>   
             </div>
