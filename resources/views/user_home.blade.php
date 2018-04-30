@@ -23,9 +23,10 @@
         });
     }
 
-    $('#companycategory').selectize({
+    $(document).ready(function() {
+        $('#companycategory').selectize({
             plugins: ['remove_button'],
-            delimiter: ',',
+            delimiter: ';',
             persist: false,
             create: function(input) {
                 return {
@@ -33,8 +34,20 @@
                     text: input
                 }
             }
+        });
+
+        //var tags = "foo;fii;cobaa".split(";");
+
+        var selectize_tags = $("#companycategory")[0].selectize
+            selectize_tags.addOption({text:'foo', value: 'foo'});
+            selectize_tags.addOption({text:'fii', value: 'fii'});
+            selectize_tags.addOption({text:'doo', value: 'doo'});
+
+            //selectize_tags.setValue(tags);
+        
     });
 </script>
+
 <div class="container" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -43,18 +56,18 @@
                     <form action="" id="formpesan">
                         @csrf
                         <div class="form-group row">
-                            <label for="spend" class="col-sm-4 text-md-right"> Spend </label>
-                            <input type="text" class="form-control col-md-4" name="spend">
+                            <label for="spend" class="col-md-3 text-md-right"> Spend </label>
+                            <input type="text" class="form-control col-md-6" name="spend">
                         </div>
                 
 
                         <div class="form-group row">
-                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Company Category </label>
-                            <textarea class="form-control col-md-4" id="companycategory"> </textarea>
+                            <label for="opsibayar" class="col-md-3 col-form-label text-md-right"> Company Category </label>
+                            <textarea class="col-md-6" id="companycategory" name="companycategory"> </textarea>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-4 offset-md-4">
                                 <button type="button" class="btn btn-primary" onclick="pesan()"> Pesan </button>
                             </div>
                         </div>

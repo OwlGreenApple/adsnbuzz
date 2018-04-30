@@ -17,8 +17,8 @@
     <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
+    
     <script src="{{ asset('js/selectize.js') }}"></script>
 
     <!-- Fonts -->
@@ -45,12 +45,12 @@
                         @else 
                             <li><a href="{{ url('/') }}">Home</a></li>
                             @if (Auth::user()->admin == 1)
-                                <li><a href="">Confirm Payment</a></li>
+                                <li><a href="{{ url('/confirm-admin') }}">Confirm Payment</a></li>
                                 <li><a href="{{ url('/report') }}">Reports</a></li>
                                 <li><a href="{{ url('/coupon') }}">Coupon</a></li>
                             @else 
                                 <li><a href="{{ url('/order') }}">Order</a></li>
-                                <li><a href="">Confirm Payment</a></li>
+                                <li><a href="{{ url('/confirm-user') }}">Confirm Payment</a></li>
                                 <li><a href="{{ url('/report-user') }}">Reports</a></li>
                             @endif
                         @endguest
@@ -63,6 +63,9 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+                            @if(Auth::user()->admin == 0)
+                                <li>Rp. <?php echo number_format(Auth::user()->deposit) ?></li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

@@ -8,5 +8,5 @@ use DB;
 
 class UserController extends Controller
 {
-		
+	
 }

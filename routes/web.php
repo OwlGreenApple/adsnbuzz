@@ -37,12 +37,15 @@ Route::group(['middleware' => ['web','auth']], function() {
 	Route::get('/report-user','ReportController@user_index');
 	Route::post('/report-user/{id}','ReportController@showData');
 	Route::post('/pesan/{id}','OrderController@pesan');
+	Route::get('/confirm-user','ConfirmController@confirmUser');
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
 	Route::resource('coupon','CouponController');
 	Route::get('/report','ReportController@index');
 	Route::post('/report/save','ReportController@savecsv');
+	Route::get('/confirm-admin','ConfirmController@confirmAdminView');
+	Route::post('/confirm/save','ConfirmController@confirmAdmin');
 });
 
 Route::get('/password/reset/{id}', function() {

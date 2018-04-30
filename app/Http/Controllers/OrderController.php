@@ -28,9 +28,9 @@ class OrderController extends Controller
     	$order->opsibayar = $request->opsibayar;
     	$order->save();
 
-    	$user = User::find($id);
+    	/*$user = User::find($id);
     	$user->deposit = $user->deposit + $request->jml_order;
-    	$user->save();
+    	$user->save();*/
     }
 		
 	public function calc_coupon(Request $request){
@@ -56,8 +56,10 @@ class OrderController extends Controller
 			return "invalid";
 		} else {
 			$user->deposit = $user->deposit - $request->spend;
+			$user->companycategory = $request->companycategory;
 			$user->save();
 			return "valid";
 		}
+
 	}
 }
