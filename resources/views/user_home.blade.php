@@ -22,7 +22,7 @@
             }
         });
     }
-
+$(document).ready(function() {
     $('#companycategory').selectize({
             plugins: ['remove_button'],
             delimiter: ',',
@@ -34,6 +34,7 @@
                 }
             }
     });
+});
 </script>
 <div class="container" id="isiform">
     <div class="row justify-content-center">
