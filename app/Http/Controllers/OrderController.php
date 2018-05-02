@@ -55,7 +55,8 @@ class OrderController extends Controller
 		if($request->spend > $user->deposit){
 			return "invalid";
 		} else {
-			$user->deposit = $user->deposit - $request->spend;
+			//$user->deposit = $user->deposit - $request->spend;
+			$user->spend_month = $request->spend;
 			$user->companycategory = $request->companycategory;
 			$user->save();
 			return "valid";

@@ -31,7 +31,9 @@ Route::group(['middleware' => ['web','auth']], function() {
 	Route::get('/report-user','ReportController@user_index');
 	Route::post('/report-user/{id}','ReportController@showData');
 	Route::post('/pesan/{id}','OrderController@pesan');
-	Route::get('/confirm-user','ConfirmController@confirmUser');
+	Route::get('/confirm-user','ConfirmController@confirmUserView');
+	Route::get('/confirm-user/{id}','ConfirmController@uploadView');
+	Route::post('/confirm-user/save/{id}','ConfirmController@uploadBukti');
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
@@ -39,7 +41,11 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 	Route::get('/report','ReportController@index');
 	Route::post('/report/save','ReportController@savecsv');
 	Route::get('/confirm-admin','ConfirmController@confirmAdminView');
-	Route::post('/confirm/save','ConfirmController@confirmAdmin');
+	Route::get('/confirm/save','ConfirmController@confirmAdmin');
+	Route::get('/confirm/unsave','ConfirmController@unconfirmAdmin');
+	Route::get('/confirm/reject','ConfirmController@rejectorder');
+	Route::get('/confirm/unreject','ConfirmController@unrejectorder');
+	Route::post('/confirm/search','ConfirmController@searchorder');
 });
 
 Route::get('/password/reset/{id}', function() {

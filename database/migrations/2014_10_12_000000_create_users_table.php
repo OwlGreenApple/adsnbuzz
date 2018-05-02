@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->boolean('admin')->default(0);
             $table->double('deposit')->nullable();
+            $table->string('companycategory')->nullable();
+            $table->double('spend_month')->nullable();
         });
     }
 
