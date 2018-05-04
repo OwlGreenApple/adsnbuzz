@@ -2,25 +2,29 @@
 
 @section('content')
 <script type="text/javascript">
-	function konfirmasi(order){
+	function konfirmasi(orderid){
 		$.ajax({
             type : 'GET',
             url : "{{url('/confirm/save')}}",
-            data : {order:order},
+            data : {orderid:orderid},
             dataType : 'text',
             success: function(response) {
                 console.log("success");
                 alert("Pesanan sudah terkonfirmasi");
-            }
+			}
         });
 	}
 
-	function unkonfirmasi(order){
+	$( "body" ).on( "click", ".confirm", function() {
+	   	$(this).replaceWith('<button type="button" class="btn btn-primary unconfirm" onclick="unkonfirmasi('+$(this).attr("data")+')" data="'+$(this).attr("data")+'" > Unconfirm </button>')
+	});
+
+	function unkonfirmasi(orderid){
 		if(confirm("Unconfirm this order?")) {
 			$.ajax({
 	            type : 'GET',
 	            url : "{{url('/confirm/unsave')}}",
-	            data : {order:order},
+	            data : {orderid:orderid},
 	            dataType : 'text',
 	            success: function(response) {
 	                console.log("success");
@@ -30,12 +34,16 @@
 	    }
 	}
 
-	function rejectt(order){
+	$( "body" ).on( "click", ".unconfirm", function() {
+	   	$(this).replaceWith('<button type="button" class="btn btn-primary confirm" onclick="konfirmasi('+$(this).attr("data")+')" data="'+$(this).attr("data")+'" > Confirm </button>')
+	});
+
+	function rejectt(orderid){
 		if(confirm("Reject this order?")) {
 			$.ajax({
 	            type : 'GET',
 	            url : "{{url('/confirm/reject')}}",
-	            data : {order:order},
+	            data : {orderid:orderid},
 	            dataType : 'text',
 	            success: function(response) {
 	                console.log("success");
@@ -45,11 +53,15 @@
 	    }
 	}
 
-	function unrejectt(order){
+	$( "body" ).on( "click", ".reject", function() {
+	   	$(this).replaceWith('<button type="button" class="btn btn-primary unreject" onclick="unrejectt('+$(this).attr("data")+')" data="'+$(this).attr("data")+'" > Unreject </button>')
+	});
+
+	function unrejectt(orderid){
 		$.ajax({
 	        type : 'GET',
 	        url : "{{url('/confirm/unreject')}}",
-	        data : {order:order},
+	        data : {orderid:orderid},
 	        dataType : 'text',
 	        success: function(response) {
 	            console.log("success");
@@ -57,6 +69,10 @@
 	        }
 	    });
 	}
+
+	$( "body" ).on( "click", ".unreject", function() {
+	   	$(this).replaceWith('<button type="button" class="btn btn-danger reject" onclick="rejectt('+$(this).attr("data")+')" data="'+$(this).attr("data")+'" > Reject </button>')
+	});
 
 	function cari(){
 		$.ajax({
@@ -73,8 +89,7 @@
 	            	$('#tabelorder tbody').empty();
 
 	                var trHTML = '';
-	                trHTML += '<tr><td>' + data.tgl_order + '</td><td>' + data.no_order + '</td><td>' + data.jml_order + 
-	                    '</td><td>' + data.kodekupon + '</td><td>' + data.opsibayar + '</td><td align="center"><a href="' + "<?php echo url(Storage::url()); ?>" + data.buktibayar + '">View</a></td></tr>';
+	                
 	                
 	                $('#tabelorder tbody').replaceWith(trHTML);
 	            }
@@ -102,6 +117,7 @@
 		                    		<th>Tanggal Order</th>
 		                    		<th>Nomor Order</th>
 		                    		<th>Jumlah Order</th>
+		                    		<th>Total Harga</th>
 		                    		<th>Kode Kupon</th>
 		                    		<th>Opsi Bayar</th>
 		                    		<th>Bukti Bayar</th>
@@ -113,6 +129,7 @@
 		                    				<td>{{ $order->tgl_order }}</td>
 		                    				<td>{{ $order->no_order }}</td>
 		                    				<td>Rp. <?php echo number_format("$order->jml_order") ?></td>
+		                    				<td>Rp. <?php echo number_format("$order->totalharga") ?></td>
 		                    				<td>{{ $order->kodekupon }}</td>
 		                    				<td>{{ $order->opsibayar }}</td>
 		                    				@if ($order->buktibayar!=null)
@@ -122,17 +139,18 @@
 		                    				@endif
 
 		                    				@if ($order->konfirmasi==0)
-		                    					<td align="center"><button type="button" id="confirm" class="btn btn-primary" onclick="konfirmasi({{$order}})"> Confirm </button></td>
+		                    					<td align="center"><button type="button" class="btn btn-primary confirm" onclick="konfirmasi({{$order->id}})" data="{{$order->id}}"> Confirm </button></td>
 		                    				@elseif ($order->konfirmasi==2)
 		                    					<td align="center"><button type="button" id="confirmdis" class="btn btn-primary disabled"> Confirm </button></td>
 		                    				@else 
-		                    					<td align="center"><button type="button" id="unconfirm" class="btn btn-primary" onclick="unkonfirmasi({{$order}})"> Unconfirm </button></td>
+		                    					<td align="center"><button type="button" class="btn btn-primary unconfirm" onclick="unkonfirmasi({{$order->id}})" data="{{$order->id}}"> Unconfirm </button>
+		                    					</td>
 		                    				@endif
 
 		                    				@if ($order->konfirmasi!=2)
-		                    					<td align="center"><button type="button" id="reject" class="btn btn-danger" onclick="rejectt({{$order}})"> Reject </button></td>
+		                    					<td align="center"><button type="button" class="btn btn-danger reject" onclick="rejectt({{$order->id}})" data="{{$order->id}}"> Reject </button></td>
 		                    				@else
-		                    					<td align="center"><button type="button" id="unreject" class="btn btn-danger" onclick="unrejectt({{$order}})"> Unreject </button></td>
+		                    					<td align="center"><button type="button" class="btn btn-danger unreject" onclick="unrejectt({{$order->id}})" data="{{$order->id}}"> Unreject </button></td>
 		                    				@endif
 		                    			</tr>
 		                    		@endforeach

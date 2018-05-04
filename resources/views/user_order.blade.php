@@ -11,44 +11,44 @@
 			data : $('form').serialize(),
 			dataType : 'text',
 			success: function(response) {
-				console.log("success");
-				$("#isiform").hide();
-				$('#pesan').html("Order Telah Tersimpan. <br> Silahkan lakukan pembayaran terlebih dahulu.");
+				if(response=='failed'){
+					alert("Kode kupon tidak ditemukan");
+				} else {
+					console.log("success");
+					//$("#isiform").reset();
+					alert("Order Telah Tersimpan. Silahkan lakukan pembayaran terlebih dahulu.");
+				}
 			}
 		});
 	}
 	function calcCoupon(){
+		var jmlorder = $("#jml-order").val();
 		$.ajax({
 			type : 'POST',
 			url : "{{url('/calc-coupon')}}",
-			data : $('form').serialize(),
+			data : $('form').serialize() + '&jmlorder=' + jmlorder,
 			dataType: 'text',
-			success: function(response) {
-				var data = jQuery.parseJSON(response);
-				if(data.status=='found') {
-					if(data.tipe=='Nominal'){
-						console.log("a");
-						$("#total-price").html(parseInt($("#jml-order").val()) - parseInt(data.value));
-					} else {
-						$("#total-price").html(parseInt($("#jml-order").val()) - ($("#jml-order").val() * (parseInt(data.value)/100)));
-					}
+			success: function(data) {
+				//var data = jQuery.parseJSON(response);
+				if(data == 'not-found') {
+					alert('Kode kupon tidak ditemukan');	
 				}
-				else if(data.status=='not-found') {
-					console.log("b");
+				else {
+					$("#total-price").html(data);
 				}
 			}
 		});
 	}
 </script>
 
-<div class="container" id="isiform">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Order</div>
 
                 <div class="card-body">
-                    <form action="{{url('/order/'.Auth::user()->id)}}" method="post">
+                    <form action="{{url('/order/'.Auth::user()->id)}}" method="post" id="isiform">
                     	@csrf
                         <div class="form-group row">
                             <label for="jml_order" class="col-sm-4 text-md-right"> Jumlah Order </label>

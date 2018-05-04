@@ -61,27 +61,27 @@ class ConfirmController extends Controller
     }
 
     public function confirmAdmin(Request $request){
-        $orderr = Order::find($request->order['id']);
+        $orderr = Order::find($request->orderid);
     	$orderr->konfirmasi = '1';
         $orderr->save();
 
-        $user = User::find($request->order['user_id']);
-        $user->deposit = $user->deposit + $request->order['jml_order'];
+        $user = User::find($orderr->user_id);
+        $user->deposit = $user->deposit + $orderr->jml_order;
         $user->save();
     }
 
     public function unconfirmAdmin(Request $request){
-        $orderr = Order::find($request->order['id']);
+        $orderr = Order::find($request->orderid);
         $orderr->konfirmasi = '0';
         $orderr->save();
 
-        $user = User::find($request->order['user_id']);
-        $user->deposit = $user->deposit - $request->order['jml_order'];
+        $user = User::find($orderr->user_id);
+        $user->deposit = $user->deposit - $orderr->jml_order;
         $user->save();
     }
 
     public function rejectorder(Request $request){
-        $orderr = Order::find($request->order['id']);
+        $orderr = Order::find($request->orderid);
         $orderr->konfirmasi = '2';
         $orderr->save();
 
@@ -91,7 +91,7 @@ class ConfirmController extends Controller
     }
 
     public function unrejectorder(Request $request){
-        $orderr = Order::find($request->order['id']);
+        $orderr = Order::find($request->orderid);
         $orderr->konfirmasi = '0';
         $orderr->save();
 

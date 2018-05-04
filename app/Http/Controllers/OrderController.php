@@ -20,14 +20,42 @@ class OrderController extends Controller
     }
 
     public function store(Request $request, $id){
-    	$order = new Order;
-    	$order->user_id = $id;
-    	$order->tgl_order = date('Y-m-d H:i:s');
-    	$order->kodekupon = $request->coupon_code;
-    	$order->jml_order = $request->jml_order;
-    	$order->opsibayar = $request->opsibayar;
-    	$order->save();
+    	$coupon = Coupon::where("kodekupon",$request->coupon_code)->first();
 
+    	if (is_null($coupon)){
+			return "failed";
+		}
+		else {
+			if($coupon->tipekupon == 'Nominal'){
+				$totalharga = $request->jml_order - $coupon->diskon;
+			} else {
+				$totalharga = $request->jml_order - ($request->jml_order * ($coupon->diskon/100));
+			}
+
+			$noorder = date("Y").date("m").date("d");
+
+	    	$orderall = Order::All();
+	    	$lastorder = collect($orderall)->last();
+	    	$tgllast = substr($lastorder->no_order, 0,8);
+
+	    	if($noorder==$tgllast){
+	    		$number = (int)substr($lastorder->no_order,8,3);
+	    		$noorder = $noorder.sprintf('%03d',$number+1);
+	    	} else {
+	    		$noorder = $noorder.sprintf('%03d',1);
+	    	}
+
+	    	$order = new Order;
+	    	$order->user_id 	= $id;
+	    	$order->tgl_order 	= date('Y-m-d H:i:s');
+	    	$order->kodekupon 	= $request->coupon_code;
+	    	$order->jml_order 	= $request->jml_order;
+	    	$order->opsibayar 	= $request->opsibayar;
+	    	$order->no_order	= $noorder;
+	    	$order->totalharga 	= $totalharga;
+	    	$order->save();
+		}
+    
     	/*$user = User::find($id);
     	$user->deposit = $user->deposit + $request->jml_order;
     	$user->save();*/
@@ -35,17 +63,16 @@ class OrderController extends Controller
 		
 	public function calc_coupon(Request $request){
 		$coupon = Coupon::where("kodekupon",$request->coupon_code)->first();
+
 		if (is_null($coupon)){
-			$arr["value"] = "";
-			$arr['status'] = 'not-found';
-			$arr['tipe'] = "";
-			return $arr;    
+			return 'not-found';
 		}
 		else {
-			$arr["value"] = $coupon->diskon;
-			$arr['status'] = 'found';
-			$arr['tipe'] = $coupon->tipekupon;
-			return $arr;    
+			if($coupon->tipekupon == 'Nominal'){
+				return $request->jmlorder - $coupon->diskon;
+			} else {
+				return $request->jmlorder - ($request->jmlorder * ($coupon->diskon/100));
+			}	  
 		}
 	}
 
