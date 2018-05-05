@@ -3,6 +3,8 @@
 @section('content')
 @guest
 @else
+<link href="{{ asset('css/user_home.css') }}" rel="stylesheet">
+
 <script type="text/javascript">
     function pesan(){
         $.ajax({
@@ -17,7 +19,6 @@
                 } else {
                     console.log("success");
                     alert("Pesanan tersimpan");
-                    document.getElementById("formpesan").reset();
                 }
             }
         });
@@ -59,11 +60,16 @@
                     <form action="" id="formpesan">
                         @csrf
                         <div class="form-group row">
-                            <label for="spend" class="col-md-3 text-md-right"> Spend </label>
-                            <input type="text" class="form-control col-md-6" name="spend" style="margin-left: 13px;">
+                            @if ($user->spend_month==0)
+                                <label for="spend" class="col-md-3 text-md-right"> Setup Spend Bulan 1 </label>
+                            @else 
+                                <label for="spend" class="col-md-3 text-md-right"> Max Spend </label>
+                                <a class="tooltips"><img src="blue_question_mark.png" height="13px">
+                                <span>Perubahan Max Spend berlaku bulan depan</span></a>
+                            @endif
+                            <input type="text" class="form-control col-md-6" id="spend" name="spend" style="margin-left: 10px;" value="{{ $user->spend_month}}">
                         </div>
                 
-
                         <div class="form-group row">
                             <label for="opsibayar" class="col-md-3 col-form-label text-md-right"> Company Category </label>
                             <textarea class="col-md-6" id="companycategory" name="companycategory" placeholder="Categories of your company..."> </textarea>

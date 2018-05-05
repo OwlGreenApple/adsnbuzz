@@ -16,9 +16,10 @@ class Orders extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
-            $table->string('kodekupon');
+            $table->string('kodekupon')->nullable();
             $table->timestamp('tgl_order');
             $table->double('jml_order');
+            $table->double('totalharga');
             $table->string('opsibayar');
             $table->string('buktibayar')->nullable();
             $table->boolean('konfirmasi')->default(0);

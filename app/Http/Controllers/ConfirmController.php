@@ -5,7 +5,10 @@ namespace AdsnBuzz\Http\Controllers;
 use Illuminate\Http\Request;
 use AdsnBuzz\Order;
 use AdsnBuzz\User;
-use Auth;
+use AdsnBuzz\Allocation;
+
+use AdsnBuzz\Mail\Confirmation;
+use Auth,Mail;
 
 class ConfirmController extends Controller
 {
@@ -68,6 +71,15 @@ class ConfirmController extends Controller
         $user = User::find($orderr->user_id);
         $user->deposit = $user->deposit + $orderr->jml_order;
         $user->save();
+
+        $allocation = new Allocation;
+        $allocation->user_id = $orderr->user_id;
+        $allocation->order_id = $orderr->id;
+        $allocation->kredit = $orderr->jml_order;
+        $allocation->description = 'Deposit';
+        $allocation->save();
+
+        Mail::to($user->email)->queue(new Confirmation($user->email));    
     }
 
     public function unconfirmAdmin(Request $request){
@@ -78,25 +90,30 @@ class ConfirmController extends Controller
         $user = User::find($orderr->user_id);
         $user->deposit = $user->deposit - $orderr->jml_order;
         $user->save();
+
+        $allocation = Allocation::where('order_id',$orderr->id)->first();
+        $allocation->delete();
     }
 
     public function rejectorder(Request $request){
         $orderr = Order::find($request->orderid);
+
+        if($orderr->konfirmasi=='1'){
+            $user = User::find($orderr->user_id);
+            $user->deposit = $user->deposit - $orderr->jml_order;
+            $user->save(); 
+            
+            $allocation = Allocation::where('order_id',$orderr->id)->first();
+            $allocation->delete();          
+        }
+
         $orderr->konfirmasi = '2';
         $orderr->save();
-
-        /*$user = User::find($request->order['user_id']);
-        $user->deposit = $user->deposit - $request->order['jml_order']; //masih bingung kalo pas udah diconfirm trus direject harus dikurangi
-        $user->save();*/
     }
 
     public function unrejectorder(Request $request){
         $orderr = Order::find($request->orderid);
         $orderr->konfirmasi = '0';
         $orderr->save();
-
-        /*$user = User::find($request->order['user_id']);
-        $user->deposit = $user->deposit - $request->order['jml_order']; //masih bingung kalo pas udah diconfirm trus direject harus dikurangi
-        $user->save();*/
     }
 }

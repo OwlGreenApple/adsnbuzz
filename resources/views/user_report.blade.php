@@ -54,7 +54,7 @@
         </form>    
     </div>
     
-    <div class="row" id="isidata">
+    <div class="row" id="isidata" style="overflow-x: auto;">
         <table class="table table-bordered table-responsive">
             <thead>
                 <tr>

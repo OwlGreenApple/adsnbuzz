@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use AdsnBuzz\Order;
 use AdsnBuzz\Coupon;
 use AdsnBuzz\User;
-use DB;
+
+use AdsnBuzz\Mail\MaxSpend;
+use DB,Mail;
 
 class OrderController extends Controller
 {
@@ -83,9 +85,13 @@ class OrderController extends Controller
 			return "invalid";
 		} else {
 			//$user->deposit = $user->deposit - $request->spend;
-			$user->spend_month = $request->spend;
+			if($request->spend!=$user->spend_month){
+				$user->spend_month = $request->spend;	
+				Mail::to('puspitanurhidayati@gmail.com')->queue(new MaxSpend($user->email,$user->name));
+			}
 			$user->companycategory = $request->companycategory;
 			$user->save();
+
 			return "valid";
 		}
 

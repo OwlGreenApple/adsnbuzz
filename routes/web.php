@@ -56,5 +56,3 @@ Route::get('/coba',function() {
 	return view('coba');
 });
 
-Route::get('mail/send', 'MailController@send');
-

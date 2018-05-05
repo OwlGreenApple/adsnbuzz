@@ -99,7 +99,7 @@
 </script>
 <div class="container" id="isiform">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-14">
             <div class="card">
                 <div class="card-header">Confirm Payment</div>
 
@@ -115,6 +115,7 @@
                 			<table class="table table-bordered">
 		                    	<thead align="center">
 		                    		<th>Tanggal Order</th>
+		                    		<th>User ID</th>
 		                    		<th>Nomor Order</th>
 		                    		<th>Jumlah Order</th>
 		                    		<th>Total Harga</th>
@@ -127,6 +128,7 @@
 		                    		@foreach ($orders as $order)
 		                    			<tr>
 		                    				<td>{{ $order->tgl_order }}</td>
+		                    				<td>{{ $order->user_id }}</td>
 		                    				<td>{{ $order->no_order }}</td>
 		                    				<td>Rp. <?php echo number_format("$order->jml_order") ?></td>
 		                    				<td>Rp. <?php echo number_format("$order->totalharga") ?></td>
@@ -163,11 +165,5 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class = "container"> 
-	 <div class="row justify-content-center">
-	 	<span align="center" id="pesan"></span>
-	 </div>
 </div>
 @endsection

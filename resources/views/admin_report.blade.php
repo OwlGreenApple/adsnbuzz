@@ -24,6 +24,12 @@
                             <input type="file" name="filecsv">  
                         </div>
 
+                        <div class="form-group row">
+                            <label for="file" class="col-md-4 col-form-label text-md-right"> Agency Fee </label>
+                            <input type="text" class="form-control col-md-1" name="agencyfee" value="20">
+                            <p class="col-md-1">%</p>
+                        </div>
+
                         <div class="form-group" align="center">
                             <button type="submit" class="btn btn-primary"> Upload </button>
                         </div>

@@ -5,8 +5,10 @@ namespace AdsnBuzz\Http\Controllers;
 use Illuminate\Http\Request;
 use AdsnBuzz\User;
 use AdsnBuzz\Report;
-use DB;
-use Excel;
+use AdsnBuzz\Allocation;
+
+use AdsnBuzz\Mail\Deposit;
+use DB,Excel,Mail;
 
 class ReportController extends Controller
 {
@@ -26,10 +28,14 @@ class ReportController extends Controller
     }
 
     public function savecsv(Request $request){
-    	if($request->hasFile('filecsv')){
+    	if($request->agencyfee>100){
+	    	echo "<script> alert('Masukkan agency fee antara 0 - 100%'); 
+	    	window.location.href='adsnbuzz/public/report'; </script>";	
+    	} else if($request->hasFile('filecsv')){
     		//dd($request->file('filecsv'));
 			$path = $request->file('filecsv')->getRealPath();
 			$data = Excel::load($path)->get();
+			$jmlads = 0;
 			if(!empty($data) && $data->count()){
 				foreach ($data as $key => $value) {
 					$report = new Report;
@@ -44,11 +50,28 @@ class ReportController extends Controller
 					$report->impressions 	= $value->impressions;
 					$report->cost 			= $value->cost_per_results;
 					$report->amountspent 	= $value->amount_spent_idr;
+					$jmlads 				= $jmlads+$value->amount_spent_idr;
 					$report->ends 			= $value->ends;
 					$report->pta 			= $value->people_taking_action;
+					$report->agencyfee		= $request->agencyfee;
 					$report->created_at 	= date('Y-m-d H:i:s', time());
 					$report->save();
 				}
+				$user = User::find($report->user_id);
+				if($user->deposit<=$user->spend_month){
+					Mail::to($user->email)->queue(new Deposit($user->email,$user->deposit));	
+				}
+
+				$allocation = new Allocation;
+				$allocation->user_id 		= $report->user_id;
+				$allocation->debit 			= $jmlads;
+				$allocation->description 	= 'Ads '.date('M').date('Y');
+				$allocation->totaldebit 	= $jmlads + ($user->spend_month*($request->agencyfee/100));
+				$allocation->save();
+
+				//mengurangi deposit user 
+				$user->deposit = $user->deposit - $allocation->totaldebit;
+				$user->save();
 				dd('Insert Record successfully.');
 			}
 		}

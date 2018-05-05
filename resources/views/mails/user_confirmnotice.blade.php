@@ -1,0 +1,1 @@
+<p>Order deposit Anda telah dikonfirmasi</p>
