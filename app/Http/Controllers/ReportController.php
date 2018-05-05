@@ -57,10 +57,6 @@ class ReportController extends Controller
 					$report->created_at 	= date('Y-m-d H:i:s', time());
 					$report->save();
 				}
-				$user = User::find($report->user_id);
-				if($user->deposit<=$user->spend_month){
-					Mail::to($user->email)->queue(new Deposit($user->email,$user->deposit));	
-				}
 
 				$allocation = new Allocation;
 				$allocation->user_id 		= $report->user_id;
@@ -69,9 +65,14 @@ class ReportController extends Controller
 				$allocation->totaldebit 	= $jmlads + ($user->spend_month*($request->agencyfee/100));
 				$allocation->save();
 
+				$user = User::find($report->user_id);
 				//mengurangi deposit user 
 				$user->deposit = $user->deposit - $allocation->totaldebit;
 				$user->save();
+
+				if($user->deposit<=$user->spend_month){
+					Mail::to($user->email)->queue(new Deposit($user->email,$user->deposit));	
+				}
 				dd('Insert Record successfully.');
 			}
 		}

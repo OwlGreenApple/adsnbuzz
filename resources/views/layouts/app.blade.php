@@ -29,9 +29,9 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+            
+                <a class=" col-md-1 navbar-brand" href="{{ url('/') }}">
+                    <img src="logo.png" style="position:relative; max-width: 160%; margin-right : 10px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,15 +43,11 @@
                         <!-- Authentication Admin login redirect menu admin -->
                         @guest
                         @else 
-                            <li><a href="{{ url('/') }}">Home</a></li>
                             @if (Auth::user()->admin == 1)
                                 <li><a href="{{ url('/confirm-admin') }}">Confirm Payment</a></li>
                                 <li><a href="{{ url('/report') }}">Reports</a></li>
                                 <li><a href="{{ url('/coupon') }}">Coupon</a></li>
                             @else 
-                                <li><a href="{{ url('/order') }}">Order</a></li>
-                                <li><a href="{{ url('/confirm-user') }}">Confirm Payment</a></li>
-                                <li><a href="{{ url('/report-user') }}">Reports</a></li>
                             @endif
                         @endguest
                     </ul>
@@ -86,10 +82,9 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
+            
         </nav>
-
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

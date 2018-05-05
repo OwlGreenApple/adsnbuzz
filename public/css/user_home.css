@@ -36,3 +36,25 @@ a:hover.tooltips span {
   margin-left: -76px;
   z-index: 999;
 }
+
+.tombolmenu{
+  position:relative; 
+  max-width: 15%;
+}
+
+.youraction{
+  color: white;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+.backgrounduser{
+  background-color: white;
+  background-image:url('../design/backgrounuserhome.png');
+  background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
+  background-size:cover;
+}
+
+.divv {
+  height: 590px;
+}
