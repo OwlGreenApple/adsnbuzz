@@ -21,8 +21,8 @@ class Allocations extends Migration
             $table->double('kredit')->nullable();
             $table->string('description');
             $table->double('totalbalance');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

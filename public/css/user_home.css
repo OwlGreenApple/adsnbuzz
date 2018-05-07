@@ -56,5 +56,5 @@ a:hover.tooltips span {
 }
 
 .divv {
-  height: 590px;
+  overflow: hidden;
 }

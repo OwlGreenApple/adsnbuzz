@@ -51,11 +51,11 @@
         }
     });
 </script>
-    <div class="col-md-3" style="background-color: white; float: left;">
-        @include('layouts.user')
+    <div class="divv col-md-3" style="background-color: white; float: left; border-style: solid;">
+            @include('layouts.user')
     </div>
 
-    <div class="divv col-md-9 py-4 backgrounduser" id="isiform" style="float: right;">
+    <div class="divv col-md-9 backgrounduser" id="isiform" style="float: right; border-style: solid;">
         <form action="" id="formpesan">
             @csrf
             <div class="form-group row">
