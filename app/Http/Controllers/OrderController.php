@@ -98,6 +98,9 @@ class OrderController extends Controller
 	}
 
 	public function maxspendview(){
-		return view('maxspend');
+		if(Auth::check()){
+			$user = User::find(Auth::user()->id);
+			return view('user_maxspend')->with('user',$user);
+		}
 	}
 }

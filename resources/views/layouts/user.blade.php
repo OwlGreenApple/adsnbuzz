@@ -57,14 +57,30 @@
 		<?php } ?>
 		<p class="menu font">Home</p>
 
+		<?php if(url()->current() == url('/order')) { ?>
+			<a href="{{ url('/order') }}"><img src="{{ asset('design/deposit.png') }}" class="tombolmenu"></a>
+		<?php } else { ?>
+			<a href="{{ url('/order') }}"><img src="{{ asset('design/deposit-hover.png') }}" class="tombolmenu"></a>
+		<?php } ?>
+		<p class="menu font">Deposit</p>	
+	</div>
+
+	<div class="column">
+		<?php if(url()->current() == url('/maxspend')) { ?>
+			<a href="{{ url('/maxspend') }}"><img src="{{ asset('design/home-button.png') }}" class="tombolmenu"></a>
+		<?php } else { ?>
+			<a href="{{ url('/maxspend') }}"><img src="{{ asset('design/home-button-hover.png') }}" class="tombolmenu"></a> 
+		<?php } ?>
+		<p class="menu font">Max Spend</p>
+
 		<?php if((url()->current() == url('/confirm-user')) or (url()->current() == url('/confirm-user/{id}'))) { ?>
 			<a href="{{ url('/confirm-user') }}"><img src="{{ asset('design/confirm-payment.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
 			<a href="{{ url('/confirm-user') }}"><img src="{{ asset('design/confirm-payment-hover.png') }}" class="tombolmenu"></a> 
 		<?php } ?>
-		<p class="menu font">Confirm Payment</p>	
+		<p class="menu font">Confirm Payment</p>
 	</div>
-
+	
 	<div class="column">
 		<?php if(url()->current() == url('/report-user')) { ?>
 			<a href="{{ url('/report-user') }}"><img src="{{ asset('design/report.png') }}" class="tombolmenu"></a>
@@ -78,14 +94,5 @@
         	<img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
         </a>
 		<p class="menu font">Logout</p>		
-	</div>
-	
-	<div class="column">
-		<?php if(url()->current() == url('/order')) { ?>
-			<a href="{{ url('/order') }}"><img src="{{ asset('design/deposit.png') }}" class="tombolmenu"></a>
-		<?php } else { ?>
-			<a href="{{ url('/order') }}"><img src="{{ asset('design/deposit-hover.png') }}" class="tombolmenu"></a>
-		<?php } ?>
-		<p class="menu font">Deposit</p>	
 	</div>
 </div>
