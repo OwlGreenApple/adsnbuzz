@@ -2,12 +2,12 @@
 <style type="text/css">
 	@font-face { 
 		font-family: FiraSansMedium; 
-		src: url('fonts/fira-sans.semibold.ttf'); 
+		src: url("{{ asset('fonts/fira-sans.semibold.ttf') }}");
 	} 
 
 	@font-face { 
 		font-family: FiraSansRegular; 
-		src: url('fonts/fira-sans.regular.ttf'); 
+		src: url("{{ asset('fonts/fira-sans.regular.ttf') }}");
 	} 
 
 	.tombolmenu{
@@ -25,7 +25,7 @@
 	  color: white;
 	  font-family: 'FiraSansMedium';
 	  font-size: 25px;
-	  margin-left: 40px;
+	  padding: 10px 0px 0px 40px;
 	}
 
 	* {
@@ -50,24 +50,42 @@
 </div>
 <div class="row justify-content-center">
 	<div class="column">
-		<a href="{{ url('/report-user') }}"><img src="design/report-hover.png" class="tombolmenu"></a>
-		<p class="menu font">Max Spend</p>
-		<a href="{{ url('/confirm-user') }}"><img src="design/confirm-payment-hover.png" class="tombolmenu"></a>
+		<?php if(url()->current() == url('/')) { ?>
+			<a href="{{ url('/') }}"><img src="{{ asset('design/home-button.png') }}" class="tombolmenu"></a>
+		<?php } else { ?>
+			<a href="{{ url('/') }}"><img src="{{ asset('design/home-button-hover.png') }}" class="tombolmenu"></a> 
+		<?php } ?>
+		<p class="menu font">Home</p>
+
+		<?php if((url()->current() == url('/confirm-user')) or (url()->current() == url('/confirm-user/{id}'))) { ?>
+			<a href="{{ url('/confirm-user') }}"><img src="{{ asset('design/confirm-payment.png') }}" class="tombolmenu"></a>
+		<?php } else { ?>
+			<a href="{{ url('/confirm-user') }}"><img src="{{ asset('design/confirm-payment-hover.png') }}" class="tombolmenu"></a> 
+		<?php } ?>
 		<p class="menu font">Confirm Payment</p>	
 	</div>
 
 	<div class="column">
-		<a href="{{ url('/report-user') }}"><img src="design/report-hover.png" class="tombolmenu"></a>
+		<?php if(url()->current() == url('/report-user')) { ?>
+			<a href="{{ url('/report-user') }}"><img src="{{ asset('design/report.png') }}" class="tombolmenu"></a>
+		<?php } else { ?>
+			<a href="{{ url('/report-user') }}"><img src="{{ asset('design/report-hover.png') }}" class="tombolmenu"></a> 
+		<?php } ?>
 		<p class="menu font">Report</p>
+
 		<a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-        	<img src="design/deposit-hover.png" class="tombolmenu">
+        	<img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
         </a>
 		<p class="menu font">Logout</p>		
 	</div>
 	
 	<div class="column">
-		<a href="{{ url('/order') }}"><img src="design/deposit-hover.png" class="tombolmenu"></a>
+		<?php if(url()->current() == url('/order')) { ?>
+			<a href="{{ url('/order') }}"><img src="{{ asset('design/deposit.png') }}" class="tombolmenu"></a>
+		<?php } else { ?>
+			<a href="{{ url('/order') }}"><img src="{{ asset('design/deposit-hover.png') }}" class="tombolmenu"></a>
+		<?php } ?>
 		<p class="menu font">Deposit</p>	
 	</div>
 </div>

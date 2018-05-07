@@ -8,7 +8,7 @@ use AdsnBuzz\Coupon;
 use AdsnBuzz\User;
 
 use AdsnBuzz\Mail\MaxSpend;
-use DB,Mail;
+use DB,Mail,Auth;
 
 class OrderController extends Controller
 {
@@ -95,5 +95,9 @@ class OrderController extends Controller
 			return "valid";
 		}
 
+	}
+
+	public function maxspendview(){
+		return view('maxspend');
 	}
 }

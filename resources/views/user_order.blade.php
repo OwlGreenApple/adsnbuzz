@@ -41,64 +41,64 @@
 	}
 </script>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Order</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="divv col-md-3" style="background-color: white; float: left;">
+	        @include('layouts.user')
+	    </div>
 
-                <div class="card-body">
-                    <form action="{{url('/order/'.Auth::user()->id)}}" method="post" id="isiform">
-                    	@csrf
-                        <div class="form-group row">
-                            <label for="jml_order" class="col-sm-4 text-md-right"> Jumlah Order </label>
-                            <select class="form-control col-md-4" name="jml_order" id="jml-order">
-								<option value="5000000">5 juta</option>
-								<option value="10000000">10 juta</option>
-								<option value="15000000">15 juta</option>
-								<option value="20000000">20 juta</option>
-								<option value="25000000">25 juta</option>
-								<option value="50000000">50 juta</option>
-								<option value="100000000">100 juta</option>
-							</select>
-                        </div>
-                
+	    <div class="divv col-md-9 backgrounduser py-4" id="isiform" style="float: right;">
+	    	<div class="col-md-8 offset-md-2">
+	            <div class="card">
+	                <div class="card-header">Deposit</div>
 
-                        <div class="form-group row">
-                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Opsi Pembayaran </label>
-                            <select class="form-control col-md-4" name="opsibayar" id="opsi-bayar">
-									<option>Transfer Bank</option>
-									<option>Credit Card</option>
-							</select>  
-                        </div>
+	                <div class="card-body">
+	                    <form action="{{url('/order/'.Auth::user()->id)}}" method="post" id="isiform">
+	                    	@csrf
+	                        <div class="form-group row">
+	                            <label for="jml_order" class="col-sm-4 text-md-right"> Jumlah Deposit </label>
+	                            <select class="form-control col-md-4" name="jml_order" id="jml-order">
+									<option value="5000000">5 juta</option>
+									<option value="10000000">10 juta</option>
+									<option value="15000000">15 juta</option>
+									<option value="20000000">20 juta</option>
+									<option value="25000000">25 juta</option>
+									<option value="50000000">50 juta</option>
+									<option value="100000000">100 juta</option>
+								</select>
+	                        </div>
+	                
 
-                        <div class="form-group row">
-                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Kode kupon</label>
-							<input type="text" class="form-control col-md-4" name="coupon_code"> &nbsp
-							<button type="button" class="btn btn-primary" onclick="calcCoupon()"> Calculate </button>
-                        </div>
+	                        <div class="form-group row">
+	                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Opsi Pembayaran </label>
+	                            <select class="form-control col-md-4" name="opsibayar" id="opsi-bayar">
+										<option>Transfer Bank</option>
+										<option>Credit Card</option>
+								</select>  
+	                        </div>
 
-                        <div class="form-group row">
-                            <label for="total-price" class="col-md-4 col-form-label text-md-right"> Total Price</label>
-														<span id="total-price" name="totalprice"></span>
-                        </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="button" class="btn btn-primary" onclick="sendData()"> Order </button>
-                            </div>
-                        </div>
+	                        <div class="form-group row">
+	                            <label for="opsibayar" class="col-md-4 col-form-label text-md-right"> Kode kupon</label>
+								<input type="text" class="form-control col-md-4" name="coupon_code"> &nbsp
+								<button type="button" class="btn btn-primary" onclick="calcCoupon()"> Calculate </button>
+	                        </div>
 
-                    </form>
-                </div>       
-            </div>
-        </div>
-    </div>
-</div>
+	                        <div class="form-group row">
+	                            <label for="total-price" class="col-md-4 col-form-label text-md-right"> Total Price</label>
+															<span id="total-price" name="totalprice"></span>
+	                        </div>
+	                        <div class="form-group row mb-0">
+	                            <div class="col-md-8 offset-md-4">
+	                                <button type="button" class="btn btn-primary" onclick="sendData()"> Order </button>
+	                            </div>
+	                        </div>
 
-<div class = "container"> 
-	 <div class="row justify-content-center">
-	 	<span align="center" id="pesan"></span>
-	 </div>
+	                    </form>
+	                </div>       
+	            </div>
+	        </div>    
+    	</div>	
+	</div>	
 </div>
 @endguest
 @endsection

@@ -3,8 +3,6 @@
 @section('content')
 @guest
 @else
-<link href="{{ asset('css/user_home.css') }}" rel="stylesheet">
-
 <script type="text/javascript">
     function pesan(){
         $.ajax({
@@ -51,36 +49,45 @@
         }
     });
 </script>
-    <div class="divv col-md-3" style="background-color: white; float: left; border-style: solid;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="divv col-md-3" style="background-color: white; float: left;">
             @include('layouts.user')
-    </div>
+        </div>
 
-    <div class="divv col-md-9 backgrounduser" id="isiform" style="float: right; border-style: solid;">
-        <form action="" id="formpesan">
-            @csrf
-            <div class="form-group row">
-                @if ($user->spend_month==0)
-                    <label for="spend" class="col-md-3 text-md-right"> Setup Spend Bulan 1 </label>
-                @else 
-                    <label for="spend" class="col-md-3 text-md-right"> Max Spend </label>
-                    <a class="tooltips"><img src="blue_question_mark.png" height="13px">
-                    <span>Perubahan Max Spend berlaku bulan depan</span></a>
-                @endif
-                <input type="text" class="form-control col-md-6" id="spend" name="spend" style="margin-left: 10px;" value="{{ $user->spend_month}}">
-            </div>
-                
-            <div class="form-group row">
-                <label for="opsibayar" class="col-md-3 col-form-label text-md-right"> Company Category </label>
-                <textarea class="col-md-6" id="companycategory" name="companycategory" placeholder="Categories of your company..."> </textarea>
-            </div>
+        <div class="divv col-md-9 backgrounduser py-4" id="isiform" style="float: right;">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="" id="formpesan">
+                            @csrf
+                            <div class="form-group row">
+                                @if ($user->spend_month==0)
+                                    <label for="spend" class="col-md-3 text-md-right"> Setup Spend Bulan 1 </label>
+                                @else 
+                                    <label for="spend" class="col-md-3 text-md-right"> Max Spend </label>
+                                    <a class="tooltips"><img src="blue_question_mark.png" height="13px">
+                                    <span>Perubahan Max Spend berlaku bulan depan</span></a>
+                                @endif
+                                <input type="text" class="form-control col-md-6" id="spend" name="spend" style="margin-left: 10px;" value="{{ $user->spend_month}}">
+                            </div>
+                                
+                            <div class="form-group row">
+                                <label for="opsibayar" class="col-md-3 col-form-label text-md-right"> Company Category </label>
+                                <textarea class="col-md-6" id="companycategory" name="companycategory" placeholder="Categories of your company..."> </textarea>
+                            </div>
 
-            <div align="center">
-                <div>
-                    <button type="button" class="btn btn-primary" onclick="pesan()"> Pesan </button>
+                            <div align="center">
+                                <div>
+                                    <button type="button" class="btn btn-primary" onclick="pesan()"> Pesan </button>
+                                </div>
+                            </div>
+                        </form>        
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-
+</div>
 @endguest
 @endsection

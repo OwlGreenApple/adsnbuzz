@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" id="isiform">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">Confirm Payment</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="divv col-md-3" style="background-color: white; float: left;">
+	        @include('layouts.user')
+	    </div>
+
+	    <div class="divv col-md-9 backgrounduser py-4" id="isiform" style="float: right;">
+	        <div class="card">
+	       		<div class="card-header">Confirm Payment</div>
 
                 <div class="card-body">
 	                    <table class="table table-bordered">
@@ -47,14 +51,8 @@
 	                    </table>
                     <?php echo $orders->render(); ?> 
                 </div>       
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class = "container"> 
-	 <div class="row justify-content-center">
-	 	<span align="center" id="pesan"></span>
-	 </div>
+	        </div>    
+    	</div>	
+	</div>	
 </div>
 @endsection

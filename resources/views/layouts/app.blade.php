@@ -10,11 +10,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
      <!-- Link Icon -->
-    <link rel='shortcut icon' type='image/png' href='icon.png'>
+    <link rel='shortcut icon' type='image/png' href="{{ asset('icon.png') }}">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('selectize/selectize.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/user_home.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
@@ -41,6 +42,7 @@
                             <ul class="navbar-nav mr-auto">
                                 <!-- Authentication Admin login redirect menu admin -->
                                 <li>Rp. <?php echo number_format(Auth::user()->deposit) ?></li>
+
                             </ul>
 
                             <!-- Right Side Of Navbar -->
@@ -48,7 +50,7 @@
                                 <!-- Authentication Links -->
                                 <li>
                                     <a class="nav-brand" href="{{ url('/') }}">
-                                        <img src="logo.png" style="position:relative; max-width: 60%; margin-bottom: 10px;">
+                                        <img src="{{ asset('logo.png') }}" style="position:relative; max-width: 60%; margin-bottom: 10px;">
                                     </a>     
                                 </li>
                             </ul>

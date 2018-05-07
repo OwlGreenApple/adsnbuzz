@@ -58,6 +58,8 @@ class ReportController extends Controller
 					$report->save();
 				}
 
+				$user = User::find($report->user_id);
+				
 				$allocation = new Allocation;
 				$allocation->user_id 		= $report->user_id;
 				$allocation->debit 			= $jmlads;
@@ -65,7 +67,6 @@ class ReportController extends Controller
 				$allocation->totaldebit 	= $jmlads + ($user->spend_month*($request->agencyfee/100));
 				$allocation->save();
 
-				$user = User::find($report->user_id);
 				//mengurangi deposit user 
 				$user->deposit = $user->deposit - $allocation->totaldebit;
 				$user->save();
