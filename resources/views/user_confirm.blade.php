@@ -24,7 +24,7 @@
 	            	$('#tabelorder tbody').empty();
 
 	                var trHTML = '';
-	                trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.totalharga + '</td>';
+	                trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.totalharga + '</td><td align="center"><form action=""><button type="submit" class="btn btn-primary"> Upload </button></form></td>';
 
 	                console.log(data.url);
 	                if(data.url==null){
