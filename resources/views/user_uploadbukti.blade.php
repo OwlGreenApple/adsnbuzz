@@ -3,11 +3,11 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="divv col-md-3" style="background-color: white; float: left;">
+        <div class="daftarmenu col-md-3">
             @include('layouts.user')
         </div>
 
-        <div class="divv col-md-9 backgrounduser py-4" id="isiform" style="float: right;">
+        <div class="kontenmenu col-md-9 py-4" id="isiform">
             <div class="col-md-10 offset-md-1">
                 <div class="card">
                 	<div class="card-header">Upload Bukti Bayar</div>

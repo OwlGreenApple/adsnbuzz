@@ -16,6 +16,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('selectize/selectize.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user_home.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>

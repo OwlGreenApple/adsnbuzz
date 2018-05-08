@@ -38,23 +38,65 @@ a:hover.tooltips span {
 }
 
 .tombolmenu{
-  position:relative; 
-  max-width: 15%;
+    position:relative; 
+    max-width: 95%;
+}
+
+.menu{
+  position: relative;
+  text-align: center;
+  font-family: 'FiraSansRegular';
 }
 
 .youraction{
   color: white;
-  font-family: Arial;
-  font-weight: bold;
+  font-family: 'FiraSansMedium';
+  font-size: 25px;
+  padding: 10px 0px 0px 40px;
 }
 
-.backgrounduser{
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 30%;
+  padding: 10px 15px 0px 15px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.daftarmenu {
+  background-color: white; 
+  float: left;
+  height: 600px;
+}
+
+.kontenmenu{
   background-color: white;
   background-image:url('../design/backgrounuserhome.png');
   background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
   background-size:cover;
+
+  float: right;
+  height: 600px;
 }
 
-.divv {
-  height: 600px;
+.balondashboard {
+  max-width: 80%; 
+  text-align: center; 
+  margin-left: 10%; 
+  margin-top: 3%;
+}
+
+.hellouser {
+  position: absolute; 
+  top: 52%; 
+  left: 200px;
 }

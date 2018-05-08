@@ -2,6 +2,14 @@
 
 @section('content')
 <script type="text/javascript">
+    function replacenull(item){
+        if (item==null){
+            return "-";
+        } else {
+            return item;
+        }
+    }
+
     function viewData(){
     $.ajax({
         type : 'POST',
@@ -17,7 +25,7 @@
 
                 var trHTML = '';
                 $.each(data.isi, function (i, item) {
-                    trHTML += '<tr><th>Start</th><td>'+item.report_starts+'</td></tr><tr><th>End</th><td>'+item.report_ends+'</td></tr><tr><th>Campaign Name</th><td>'+item.campaignname+'</td></tr><tr><th>Result</th><td>'+item.results+'</td></tr><tr><th>Result Indicator</th><td>'+item.result_ind+'</td></tr><tr><th>Reach</th><td>'+item.reach+'</td></tr><tr><th>Impression</th><td>'+item.impressions+'</td></tr><tr><th>Cost per Result</th><td>'+item.cost+'</td></tr><tr><th>Amount Spent</th><td>'+item.amountspent+'</td></tr><tr><th>People Taking Action</th><td>'+item.pta+'</td></tr><tr style="height:30px;"></tr>';
+                    trHTML += '<tr><th>Start</th><td>'+item.report_starts+'</td></tr><tr><th>End</th><td>'+item.report_ends+'</td></tr><tr><th>Campaign Name</th><td>'+replacenull(item.campaignname)+'</td></tr><tr><th>Result</th><td>'+replacenull(item.results)+'</td></tr><tr><th>Result Indicator</th><td>'+replacenull(item.result_ind)+'</td></tr><tr><th>Reach</th><td>'+replacenull(item.reach)+'</td></tr><tr><th>Impression</th><td>'+replacenull(item.impressions)+'</td></tr><tr><th>Cost per Result</th><td>'+replacenull(item.cost)+'</td></tr><tr><th>Amount Spent</th><td>'+replacenull(item.amountspent)+'</td></tr><tr><th>People Taking Action</th><td>'+replacenull(item.pta)+'</td></tr><tr style="height:30px;"></tr>';
                 });
                 document.getElementById("isidata").innerHTML = trHTML;
             } else {
@@ -50,11 +58,11 @@
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="divv col-md-3" style="background-color: white; float: left;">
+        <div class="daftarmenu col-md-3">
             @include('layouts.user')
         </div>
 
-        <div class="divv col-md-9 backgrounduser py-4" id="isiform" style="float: right;">
+        <div class="kontenmenu col-md-9 py-4" id="isiform">
             <div class="col-md-10 offset-md-1">
                 <div class="card">
                     <div class="card-header"> Report </div>

@@ -18,7 +18,7 @@ class OrderController extends Controller
     }
 
     public function index(){
-    	return view('user_order');
+    	return view('user_order')->with('user',Auth::user());
     }
 
     public function store(Request $request, $id){

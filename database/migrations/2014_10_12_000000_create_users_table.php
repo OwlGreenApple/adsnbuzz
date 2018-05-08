@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->boolean('admin')->default(0);
             $table->double('deposit')->nullable();
             $table->string('companycategory')->nullable();
-            $table->double('spend_month')->nullable();
+            $table->double('spend_month')->default(0);
         });
     }
 

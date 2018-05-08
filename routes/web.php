@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web','auth']], function() {
 	Route::get('/confirm-user/{id}','ConfirmController@uploadView');
 	Route::post('/confirm-user/save/{id}','ConfirmController@uploadBukti');
 	Route::get('/maxspend','OrderController@maxspendview');
+	Route::post('/confirm-user/search','ConfirmController@searchorder');
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
