@@ -80,7 +80,7 @@ a:hover.tooltips span {
 
 .kontenmenu{
   background-color: white;
-  background-image:url('../design/backgrounuserhome.png');
+  background-image:url('../design/backgrounduserhome.jpg');
   background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
   background-size:cover;
 

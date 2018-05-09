@@ -8,10 +8,11 @@
     src: url("../fonts/fira-sans.regular.ttf");
 }
 
-label,p,li,td, button {
+label,p,li,td, button, .card-header {
 	font-family: FiraSansRegular;
 }
- h1 {
+
+h1 {
  	font-family: FiraSansMedium;
  	color: white;
- }
+}

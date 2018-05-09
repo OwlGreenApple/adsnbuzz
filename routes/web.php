@@ -48,7 +48,10 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 	Route::get('/confirm/reject','ConfirmController@rejectorder');
 	Route::get('/confirm/unreject','ConfirmController@unrejectorder');
 	Route::post('/confirm/search','ConfirmController@searchorder');
+	Route::get('/manage-user','UserController@manageuserview');
 });
+
+Route::post('/manage-user/login/{id}','UserController@manageuserlogin');
 
 Route::get('/password/reset/{id}', function() {
 	return view('auth.password.reset');

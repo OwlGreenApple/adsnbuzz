@@ -62,6 +62,7 @@
                                 <li><a href="{{ url('/confirm-admin') }}">Confirm Payment</a></li>
                                 <li><a href="{{ url('/report') }}">Reports</a></li>
                                 <li><a href="{{ url('/coupon') }}">Coupon</a></li>
+                                <li><a href="{{ url('/manage-user') }}">Manage User</a></li>
                             </ul>
 
                             <!-- Right Side Of Navbar -->

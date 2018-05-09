@@ -22,9 +22,9 @@
 
 	<div class="column">
 		<?php if(url()->current() == url('/maxspend')) { ?>
-			<a href="{{ url('/maxspend') }}"><img src="{{ asset('design/home-button.png') }}" class="tombolmenu"></a>
+			<a href="{{ url('/maxspend') }}"><img src="{{ asset('design/max-spend.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
-			<a href="{{ url('/maxspend') }}"><img src="{{ asset('design/home-button-hover.png') }}" class="tombolmenu"></a> 
+			<a href="{{ url('/maxspend') }}"><img src="{{ asset('design/max-spend-hover.png') }}" class="tombolmenu"></a> 
 		<?php } ?>
 
 		@if($user->spend_month==0)
@@ -64,9 +64,19 @@
 	</div>
 
 	<div class="column">
-		<a href="{{ route('logout') }}" onclick="logout()">
-        	<img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
-        </a>
+		@if (Session::has('hasClonedUser'))
+            <a href="#" onclick="event.preventDefault(); document.getElementById('cloneuser-form').submit();">
+            	<img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
+            </a>
+        @else 
+			<a href="{{ route('logout') }}" onclick="logout()">
+	        	<img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
+	        </a>
+	    @endif
 		<p class="menu">Logout</p>
 	</div>
+
+	<form id="cloneuser-form" action="{{ url('manage-user/login/'.$user->id) }}" method="post">
+        @csrf
+    </form>
 </div>
