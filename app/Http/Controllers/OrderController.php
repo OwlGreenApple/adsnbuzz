@@ -22,13 +22,20 @@ class OrderController extends Controller
     }
 
     public function store(Request $request, $id){
-    	$coupon = Coupon::where("kodekupon",$request->coupon_code)->first();
+    	if($request->coupon_code==""){
+    		$kodekupon = "-";
+    	} else {
+    		$coupon = Coupon::where("kodekupon",$request->coupon_code)->first();
+    		$kodekupon = $request->coupon_code;
+    	}
 
-    	if (is_null($coupon)){
+    	if ($kodekupon!="-" && is_null($coupon)){
 			return "failed";
 		}
 		else {
-			if($coupon->tipekupon == 'Nominal'){
+			if($kodekupon=="-"){
+				$totalharga = $request->jml_order;
+			} else if ($coupon->tipekupon == 'Nominal') {
 				$totalharga = $request->jml_order - $coupon->diskon;
 			} else {
 				$totalharga = $request->jml_order - ($request->jml_order * ($coupon->diskon/100));
@@ -50,33 +57,16 @@ class OrderController extends Controller
 	    	$order = new Order;
 	    	$order->user_id 	= $id;
 	    	$order->tgl_order 	= date('Y-m-d H:i:s');
-	    	$order->kodekupon 	= $request->coupon_code;
+	    	$order->kodekupon 	= $kodekupon;
 	    	$order->jml_order 	= $request->jml_order;
 	    	$order->opsibayar 	= $request->opsibayar;
 	    	$order->no_order	= $noorder;
 	    	$order->totalharga 	= $totalharga;
 	    	$order->save();
-		}
-    
-    	/*$user = User::find($id);
-    	$user->deposit = $user->deposit + $request->jml_order;
-    	$user->save();*/
-    }
-		
-	public function calc_coupon(Request $request){
-		$coupon = Coupon::where("kodekupon",$request->coupon_code)->first();
 
-		if (is_null($coupon)){
-			return 'not-found';
+	    	return $order;
 		}
-		else {
-			if($coupon->tipekupon == 'Nominal'){
-				return $request->jmlorder - $coupon->diskon;
-			} else {
-				return $request->jmlorder - ($request->jmlorder * ($coupon->diskon/100));
-			}	  
-		}
-	}
+    }
 
 	public function pesan(Request $request,$id){
 		$user = User::find($id);
