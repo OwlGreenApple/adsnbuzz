@@ -8,7 +8,7 @@ use AdsnBuzz\User;
 use AdsnBuzz\Allocation;
 
 use AdsnBuzz\Mail\Confirmation;
-use Auth,Mail,Validator,Storage;
+use Auth,Mail,Validator,Storage,DB;
 
 class ConfirmController extends Controller
 {
@@ -34,16 +34,19 @@ class ConfirmController extends Controller
     public function searchorder(Request $request){
         $order = Order::where("no_order",$request->search)->first();
         if (is_null($order)){
-            return "not-found";
+            $arr['status'] = "not-found";
+            $arr['isi'] = "";
+            $arr['url'] = "";
         } else {
+            $arr['status'] = "found";
             $arr['isi'] = $order;
             if($order->buktibayar==null){
                 $arr['url'] = null;
             } else {
                 $arr['url'] = url(Storage::url($order->buktibayar));
             }
-            return $arr;    
         }
+        return $arr;
     }
 
     public function uploadBukti(Request $request,$id){
@@ -69,7 +72,11 @@ class ConfirmController extends Controller
     }
 
     public function confirmAdminView(){
-    	$orders = Order::orderBy('konfirmasi', 'asc')->orderBy('id', 'desc')->paginate(5);
+    	//$orders = Order::orderBy('konfirmasi', 'asc')->orderBy('id', 'desc')->paginate(5);
+        $orders = DB::table('orders')
+                  ->join('users','orders.user_id','=','users.id')
+                  ->select('orders.*','users.email')
+                  ->paginate(5);
     	return view('admin_confirm')->with('orders',$orders);
     }
 

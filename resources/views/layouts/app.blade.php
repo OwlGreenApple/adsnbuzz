@@ -57,11 +57,14 @@
                             </ul>
                         @else 
                             <!-- Left Side Of Navbar -->
-                            <ul class="navbar-nav mr-auto">
+                            <a class="nav-brand col-md-1" href="{{ url('/') }}">
+                                <img src="{{ asset('logo.png') }}" style="max-width: 170%;">
+                            </a>
+                            <ul class="navbar-nav mr-auto" style="margin-left: 70px;">
                                 <!-- Authentication Admin login redirect menu admin -->
-                                <li><a href="{{ url('/confirm-admin') }}">Confirm Payment</a></li>
-                                <li><a href="{{ url('/report') }}">Reports</a></li>
-                                <li><a href="{{ url('/coupon') }}">Coupon</a></li>
+                                <li style="margin-right: 10px;"><a href="{{ url('/confirm-admin') }}">Confirm Payment</a></li>
+                                <li style="margin-right: 10px;"><a href="{{ url('/report') }}">Reports</a></li>
+                                <li style="margin-right: 10px;"><a href="{{ url('/coupon') }}">Coupon</a></li>
                                 <li><a href="{{ url('/manage-user') }}">Manage User</a></li>
                             </ul>
 

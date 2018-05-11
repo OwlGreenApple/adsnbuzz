@@ -8,7 +8,7 @@ use AdsnBuzz\Coupon;
 class CouponController extends Controller
 {
     public function index(){
-    	$coupons = Coupon::paginate(10);
+    	$coupons = Coupon::paginate(5);
        	return view('admin_coupon')
        	       ->with('coupons',$coupons);
     }
@@ -30,7 +30,15 @@ class CouponController extends Controller
     }
 
     public function show($id){
-
+        $coupon = Coupon::where('kodekupon',$id)->first();
+        if(is_null($coupon)){
+            $arr['status'] = "not-found";
+            $arr['isi']= "";
+        } else {
+            $arr['status'] = "found";
+            $arr['isi']= $coupon;
+        }
+        return $arr;
     }
 
     public function edit($id){

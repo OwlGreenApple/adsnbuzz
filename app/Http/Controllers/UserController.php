@@ -9,7 +9,7 @@ use DB, Auth;
 class UserController extends Controller
 {
 	public function manageuserview () {
-		$users = User::where('admin','0')->paginate(10);
+		$users = User::where('admin','0')->paginate(5);
 		return view('admin_manageuser')->with('users',$users);
 	}
 
@@ -26,5 +26,18 @@ class UserController extends Controller
 	        auth()->loginUsingId($id);
 	        return redirect()->back();
 	    }
+	}
+
+	public function search(Request $request){
+		$user = User::where('email',$request->search)->first();
+
+		if(is_null($user)){
+			$arr['status'] = "not-found";
+			$arr['isi'] = "";
+		} else {
+			$arr['status'] = "found";
+			$arr['isi'] = $user;
+		}
+		return $arr;
 	}
 }

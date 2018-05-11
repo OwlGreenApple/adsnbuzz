@@ -49,6 +49,7 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 	Route::get('/confirm/unreject','ConfirmController@unrejectorder');
 	Route::post('/confirm/search','ConfirmController@searchorder');
 	Route::get('/manage-user','UserController@manageuserview');
+	Route::get('/manage-user/search','UserController@search');
 });
 
 Route::post('/manage-user/login/{id}','UserController@manageuserlogin');

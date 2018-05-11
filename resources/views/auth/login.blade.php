@@ -26,7 +26,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row" style="height: 662px;">
             <div class="col-md-6">
                 <img class="balon" src="balon.png" />  
             </div>

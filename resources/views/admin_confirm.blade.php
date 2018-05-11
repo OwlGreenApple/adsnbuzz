@@ -75,57 +75,59 @@
 	});
 
 	function cari(){
-		$.ajax({
-	        type : 'POST',
-	        url : "{{url('/confirm/search')}}",
-	        data : $('form').serialize(),
-	        dataType : 'json',
-	        success: function(data) {
-	            if(data=="not-found"){
-	            	console.log("failed");
-	            	$('#tabelorder tbody').empty();
-	            } else {
-	            	console.log("success");
-	            	$('#tabelorder tbody').empty();
+        $.ajax({
+            type : 'POST',
+            url : "{{url('/confirm/search')}}",
+            data : $('form').serialize(),
+            dataType : 'json',
+            success: function(data) {
+                if(document.getElementById('search').value != "") {
+                    if(data.status=="not-found"){
+                        console.log("failed");
+                        $('#tabelorder').empty();
+                    } else {
+                        console.log("success");
+                        $('#tabelorder').empty();
 
-	                var trHTML = '';
-	                trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.user_id + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.totalharga + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.opsibayar + '</td>';
+                        var trHTML = '';
+	                	trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.user_id + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.totalharga + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.opsibayar + '</td>';
+	                	if(data.url==null){
+		                	trHTML += '<td align="center"> - </td>';
+		                } else {
+		                	trHTML += '<td align="center"><a class="popup-newWindow" href="' + data.url + '">View</a></td>';
+		                }
 
-	                if(data.url==null){
-	                	trHTML += '<td align="center"> - </td>';
-	                } else {
-	                	trHTML += '<td align="center"><a class="popup-newWindow" href="' + data.url + '">View</a></td>';
-	                }
+		                if(data.isi.konfirmasi==0){
+		                	trHTML += '<td align="center"><button type="button" class="btn btn-primary confirm" onclick="konfirmasi(' + data.isi.id + 
+		                		')" data="'+ data.isi.id +'"> Confirm </button></td>';
+		                } else if (data.isi.konfirmasi==2) {
+		                	trHTML += '<td align="center"><button type="button" id="confirmdis" class="btn btn-primary disabled"> Confirm </button></td>';
+		                } else {
+		                	trHTML += '<td align="center"><button type="button" class="btn btn-primary unconfirm" onclick="unkonfirmasi('+ data.isi.id +')" data="'+ data.isi.id +'"> Unconfirm </button></td>';
+		                }
+		              	
+		              	if(data.isi.konfirmasi!=2){
+		              		trHTML += '<td align="center"><button type="button" class="btn btn-danger reject" onclick="rejectt('+ data.isi.id +')" data="'+data.isi.id+'"> Reject </button></td>';
+		              	} else {
+		              		trHTML += '<td align="center"><button type="button" class="btn btn-danger unreject" onclick="unrejectt('+ data.isi.id +')" data="'+ data.isi.id +'"> Unreject </button></td>';
+		              	}
 
-	                if(data.isi.konfirmasi==0){
-	                	trHTML += '<td align="center"><button type="button" class="btn btn-primary confirm" onclick="konfirmasi(' + data.isi.id + 
-	                		')" data="'+ data.isi.id +'"> Confirm </button></td>';
-	                } else if (data.isi.konfirmasi==2) {
-	                	trHTML += '<td align="center"><button type="button" id="confirmdis" class="btn btn-primary disabled"> Confirm </button></td>';
-	                } else {
-	                	trHTML += '<td align="center"><button type="button" class="btn btn-primary unconfirm" onclick="unkonfirmasi('+ data.isi.id +')" data="'+ data.isi.id +'"> Unconfirm </button></td>';
-	                }
-	              	
-	              	if(data.isi.konfirmasi!=2){
-	              		trHTML += '<td align="center"><button type="button" class="btn btn-danger reject" onclick="rejectt('+ data.isi.id +')" data="'+data.isi.id+'"> Reject </button></td>';
-	              	} else {
-	              		trHTML += '<td align="center"><button type="button" class="btn btn-danger unreject" onclick="unrejectt('+ data.isi.id +')" data="'+ data.isi.id +'"> Unreject </button></td>';
-	              	}
-	                
-	                $('#tabelorder tbody').replaceWith(trHTML);
-	            }
-	        }
-	    });
-	}
+                        document.getElementById("tabelorder").innerHTML = trHTML;;
+                        console.log(trHTML);
+                    }
+                }
+            }
+        });
+    }
 
 	$( "body" ).on( "click", ".popup-newWindow", function() {
         event.preventDefault();
         window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
       });
 </script>
-<div class="container" id="isiform">
+<div class="container py-4" id="isiform">
     <div class="row justify-content-center">
-        <div class="col-md-14">
+        <div class="col-md-13">
             <div class="card">
                 <div class="card-header menuheader">Confirm Payment</div>
 
@@ -133,15 +135,15 @@
                 	<form action="" enctype="multipart/form-data">
                 		@csrf
                 		<div class="form-group row">
-                            <input type="text" class="form-control col-md-4" name="search" placeholder="Masukkan no order..." style="margin-left: 14px;">
+                            <input type="text" class="form-control col-md-4" name="search" id="search" placeholder="Masukkan no order..." style="margin-left: 14px;">
                             <button type="button" class="btn btn-primary" style="margin-left:10px;" onclick="cari()"> Cari </button>
                 		</div>
 
-                		<div class="tabelorder" id="tabelorder">
+                		<div class="tabelorder">
                 			<table class="table table-bordered">
 		                    	<thead align="center">
 		                    		<th>Tanggal Order</th>
-		                    		<th>User ID</th>
+		                    		<th>Email User</th>
 		                    		<th>Nomor Order</th>
 		                    		<th>Jumlah Order</th>
 		                    		<th>Total Harga</th>
@@ -150,11 +152,11 @@
 		                    		<th>Bukti Bayar</th>
 		                    		<th colspan="2">Konfirmasi</th>
 		                    	</thead>
-		                    	<tbody>
+		                    	<tbody id="tabelorder">
 		                    		@foreach ($orders as $order)
 		                    			<tr>
 		                    				<td>{{ $order->tgl_order }}</td>
-		                    				<td>{{ $order->user_id }}</td>
+		                    				<td>{{ $order->email }}</td>
 		                    				<td>{{ $order->no_order }}</td>
 		                    				<td>Rp. <?php echo number_format("$order->jml_order") ?></td>
 		                    				<td>Rp. <?php echo number_format("$order->totalharga") ?></td>
