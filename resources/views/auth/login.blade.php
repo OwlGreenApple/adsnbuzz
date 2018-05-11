@@ -23,16 +23,23 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/loginregis.css') }}" rel="stylesheet">
 
+<script type="text/javascript">
+        /*$(document).ready(function() {
+            $('.row').css('height',$( window ).height()+'px');
+
+        });*/
+</script>
 </head>
+
 <body>
-    <div class="container" style="height: 662px;">
+    <div class="container" >
         <div class="row" >
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-right: 20px;">
                 <img class="balon" src="balon.png" />  
             </div>
 
-            <div class="col-md-6">
-                <!--<div class="card bg-dark loginbox">
+            <div class="col-md-6" style="height: 80%; padding-left:120px;">
+                <div class="card bg-dark loginbox">
                     <div class="card-header fonthead" align="center">LOGIN</div>
 
                     <div class="card-body">
@@ -78,7 +85,7 @@
                             </div>
                         </form>
                     </div>
-                </div>-->
+                </div>
             </div>  
         </div>
     </div>
