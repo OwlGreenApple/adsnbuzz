@@ -25,14 +25,14 @@
 
 </head>
 <body>
-    <div class="container">
-        <div class="row" style="height: 662px;">
+    <div class="container" style="height: 662px;">
+        <div class="row" >
             <div class="col-md-6">
                 <img class="balon" src="balon.png" />  
             </div>
 
             <div class="col-md-6">
-                <div class="card bg-dark loginbox">
+                <!--<div class="card bg-dark loginbox">
                     <div class="card-header fonthead" align="center">LOGIN</div>
 
                     <div class="card-body">
@@ -78,7 +78,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div>-->
             </div>  
         </div>
     </div>

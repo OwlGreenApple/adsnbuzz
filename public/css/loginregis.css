@@ -11,16 +11,24 @@
         }
 
         .container {
-            min-height: 100%; 
+            position: relative;
+            
         }
 
-        .balon {
+        .row {
             position: absolute;
             top: 50%;
             left: 50%;
+            width: 80%;
             transform: translate(-50%,-50%);
+        }
+
+        .balon {
             margin-bottom: 25%;
+            margin-right: 0px;
+            margin-left: 0px;
             max-width: 80%;
+            min-height: 100%; 
         }
 
         .loginbox {
