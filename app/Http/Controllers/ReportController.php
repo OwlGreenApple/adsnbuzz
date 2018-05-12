@@ -92,8 +92,10 @@ class ReportController extends Controller
     public function showData(Request $request, $id){
     	//dd($request->tglmulai);
     	$data = Report::where("user_id",$id)
-    					->where("report_starts",$request->tglmulai)
-    				    ->where("report_ends",$request->tglakhir)->get();
+    					->where("report_starts",'>=',$request->tglmulai)
+              ->where("report_starts",'<=',$request->tglakhir)
+              ->where("report_ends",'>=',$request->tglmulai)
+    				    ->where("report_ends",'<=',$request->tglakhir)->get();
     	//dd($data);
     	if ($data->isEmpty()){
   			$arr["status"] = 'not-found';
