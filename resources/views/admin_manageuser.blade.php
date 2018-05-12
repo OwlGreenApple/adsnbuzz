@@ -19,7 +19,7 @@
                         $('#tabeluser').empty();
 
                         var trHTML = '';
-                        trHTML += '<tr><td>' + data.isi.id + '</td><td>' + data.isi.name + '</td><td>' + data.isi.email + '</td><td>' + data.isi.spend_month + '</td><td>' + data.isi.deposit + '</td><td align="center"><form action="<?php echo url('/manage-user/login'); ?>' +'/'+ data.isi.id +'" method="post"> @csrf<button type="submit" class="btn btn-primary">Login</button></form></td></tr>';
+                        trHTML += '<tr><td>' + data.isi.id + '</td><td>' + data.isi.name + '</td><td>' + data.isi.email + '</td><td>' + data.isi.spend_month + '</td><td>' + data.isi.deposit + '</td><td align="center"><form action="<?php echo url('/report'); ?>' +'/'+ data.isi.id +'"> @csrf<button type="submit" class="btn btn-primary">Upload</button></form></td><td align="center"><form action="<?php echo url('/manage-user/login'); ?>' +'/'+ data.isi.id +'" method="post"> @csrf<button type="submit" class="btn btn-primary">Login</button></form></td></tr>';
 
                         document.getElementById("tabeluser").innerHTML = trHTML;;
                         console.log(trHTML);
@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <form>
                         <div class="form-group row">
-                            <input type="text" class="form-control col-md-4" name="search" id="search" placeholder="Masukkan email user..." style="margin-left: 14px;">
+                            <input type="text" class="form-control col-md-4" name="search" id="search" placeholder="Masukkan email/nama user..." style="margin-left: 14px;">
                             <button type="button" class="btn btn-primary" style="margin-left:10px;" onclick="cari()"> Cari </button>
                         </div>  
                     </form>
@@ -50,6 +50,7 @@
                             <th>E-mail</th>
                             <th>Max Spend</th>
                             <th>Deposit</th>
+                            <th>Report</th>
                             <th>Login</th>
                         </thead>
                         <tbody id="tabeluser">
@@ -61,9 +62,14 @@
                                 <td>Rp. <?php echo number_format($user->spend_month) ?></td>
                                 <td>Rp. <?php echo number_format($user->deposit) ?></td>
                                 <td align="center">
-                                    <form action="{{url('/manage-user/login/'.$user->id)}}" method="post"> @csrf
-                                        <button type="submit" class="btn btn-primary">Login</button>
-                                    </form>
+                                  <form action="{{url('/report/'.$user->id)}}"> @csrf
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                  </form>
+                                </td>
+                                <td align="center">
+                                  <form action="{{url('/manage-user/login/'.$user->id)}}" method="post"> @csrf
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                  </form>
                                 </td>
                             </tr>
                             @endforeach

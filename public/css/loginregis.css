@@ -24,6 +24,10 @@
             transform: translate(-50%,-50%);
         }   
 
+        .baloncont {
+          padding-right: 20px;
+        }
+
         .balon {
             margin-bottom: 25%;
             margin-top: 25%;
@@ -31,6 +35,11 @@
             margin-left: 0px;
             max-width: 100%;
             height: auto; 
+        }
+
+        .loginboxcont {
+          height: 80%; 
+          padding-left:120px;
         }
 
         .loginbox {
@@ -42,6 +51,37 @@
             margin-top: 25%;
             max-width: 100%;
         }
+
+        /*@media only screen and (max-width: 600px) {
+          .loginboxcont {
+            padding-left:30px;    
+          }
+          
+          .baloncont {
+            padding-right:0px;
+          }
+
+          .balon {
+            margin-bottom: 20%;
+          }
+
+          .loginbox {
+            margin: auto;
+          }
+
+          .row {
+            top: 43%;
+          }           
+
+          html, body {
+            height: 120%;
+          }
+
+          body  {
+            background-repeat:repeat-y;
+          }
+        }*/
+
         .regbox {
             display: block;
             position: relative;

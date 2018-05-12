@@ -29,7 +29,9 @@ class UserController extends Controller
 	}
 
 	public function search(Request $request){
-		$user = User::where('email',$request->search)->first();
+		$user = User::where('email',$request->search)
+            ->orWhere('name',$request->search)
+            ->first();
 
 		if(is_null($user)){
 			$arr['status'] = "not-found";

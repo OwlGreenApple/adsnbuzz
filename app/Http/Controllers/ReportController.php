@@ -17,10 +17,11 @@ class ReportController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-    	$users = User::where('admin','=','0')->get();
-
-    	return view('admin_report')->with('users',$users);
+    public function index($id){
+    	/*$users = User::where('admin','=','0')->get();
+    	return view('admin_report')->with('users',$users);*/
+      $user = User::find($id);
+      return view('admin_report')->with('user',$user);
     }
 
     public function user_index(){
@@ -47,7 +48,7 @@ class ReportController extends Controller
 				if(!empty($data) && $data->count()){
 					foreach ($data as $key => $value) {
 						$report = new Report;
-						$report->user_id		= $request->listuser;
+						$report->user_id		= $request->userid;
 						$report->report_starts	= $value->reporting_starts;
 						$report->report_ends 	= $value->reporting_ends;
 						$report->campaignname 	= $value->campaign_name;
@@ -95,14 +96,14 @@ class ReportController extends Controller
     				    ->where("report_ends",$request->tglakhir)->get();
     	//dd($data);
     	if ($data->isEmpty()){
-			$arr["status"] = 'not-found';
-			$arr['isi'] = "";
-			return $arr;    
-		}
-		else {
-			$arr["status"] = 'found';
-			$arr['isi'] = $data;
-			return $arr;    
-		}
+  			$arr["status"] = 'not-found';
+  			$arr['isi'] = "";
+  			return $arr;    
+  		}
+  		else {
+  			$arr["status"] = 'found';
+  			$arr['isi'] = $data;
+  			return $arr;    
+  		}
     }
 }

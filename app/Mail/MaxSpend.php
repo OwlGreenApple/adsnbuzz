@@ -17,12 +17,12 @@ class MaxSpend extends Mailable
      * @return void
      */
     protected $email;
-    protected $name;
+    protected $user;
 
-    public function __construct($email,$name)
+    public function __construct($email,$user)
     {
         $this->email = $email;
-        $this->name = $name;
+        $this->user = $user;
     }
 
     /**
@@ -34,7 +34,7 @@ class MaxSpend extends Mailable
     {
         return $this->from('puspita.celebgramme@gmail.com', 'AdsnBuzz')
                                         ->subject('[AdsnBuzz] Perubahan Max Spend')
-                                        ->view('mails.admin_maxspendchange') -> with('name',$this->name)
+                                        ->view('mails.admin_maxspendchange') -> with('user',$this->user)
                                         ->with($this->email);
     }
 }

@@ -12,10 +12,8 @@
                     	@csrf
                         <div class="form-group row">
                             <label for="listuser" class="col-md-4 text-md-right"> User </label>
-                            <select class="form-control col-md-4" name="listuser">
-                            	@foreach($users as $user)
-                            		<option value="{{$user->id}}">{{$user->name}}</option>
-                            	@endforeach
+                            <input type="text" name="username" value="{{$user->name}}" disabled>
+                            <input type="hidden" name="userid" value="{{$user->id}}">
 							</select>
                         </div>
                 

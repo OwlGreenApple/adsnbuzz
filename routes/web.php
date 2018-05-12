@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web','auth']], function() {
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
 	Route::resource('coupon','CouponController');
-	Route::get('/report','ReportController@index');
+  Route::get('/report/{id}','ReportController@index');
 	Route::post('/report/save','ReportController@savecsv');
 	Route::get('/confirm-admin','ConfirmController@confirmAdminView');
 	Route::get('/confirm/save','ConfirmController@confirmAdmin');

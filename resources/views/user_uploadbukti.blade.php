@@ -31,16 +31,16 @@
 	                    </form>
 
 	                    @if(session()->has('message'))
-	                		@if(session()->get('message')=='File berhasil diupload')
-							    <div class="alert alert-success">
-							        {{ session()->get('message') }}
-							    </div>
-							@else
-								<div class="alert alert-warning">
-							        {{ session()->get('message') }}
-							    </div>
-							@endif
-						@endif
+	                	    @if(session()->get('message')=='File berhasil diupload')
+        							    <div class="alert alert-success">
+        							        {{ session()->get('message') }}
+        							    </div>
+          							@else
+          								<div class="alert alert-warning">
+          							        {{ session()->get('message') }}
+          							    </div>
+          							@endif
+						          @endif
 	                </div>           
                 </div>    
             </div>

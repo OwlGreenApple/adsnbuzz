@@ -77,7 +77,7 @@ class OrderController extends Controller
 			//$user->deposit = $user->deposit - $request->spend;
 			if($request->spend!=$user->spend_month){
 				$user->spend_month = $request->spend;	
-				Mail::to('puspitanurhidayati@gmail.com')->queue(new MaxSpend($user->email,$user->name));
+				Mail::to('puspitanurhidayati@gmail.com')->queue(new MaxSpend($user->email,$user));
 			}
 			$user->companycategory = $request->companycategory;
 			$user->save();

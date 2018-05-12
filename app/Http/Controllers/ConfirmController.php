@@ -54,20 +54,25 @@ class ConfirmController extends Controller
             'buktibayar' => 'mimes:jpg,jpeg,png,bmp|required|file|max:2000',
         ]);
 
-        if($request->hasFile('buktibayar')){
-            if($validator->fails()){
-                return redirect()->back()->with('message', 'File yang Anda masukkan salah');
-            } else {
-                $uploadedFile = $request->file('buktibayar');        
-                $path = $uploadedFile->store('public/buktibayar');
+        $order = Order::find($id);
 
-                $order = Order::find($id);
-                $order->buktibayar = $path;
-                $order->save();
-                return redirect() ->back() ->with('message','File berhasil diupload');
-            }
+        if($order->konfirmasi==1){
+          return redirect()->back()->with('message', 'Pesanan Anda telah dikonfirmasi oleh admin');    
         } else {
-            return redirect()->back()->with('message', 'Pilih file terlebih dahulu');
+            if($request->hasFile('buktibayar')){
+              if($validator->fails()){
+                  return redirect()->back()->with('message', 'File yang Anda masukkan salah');
+              } else {
+                  $uploadedFile = $request->file('buktibayar');        
+                  $path = $uploadedFile->store('public/buktibayar');
+
+                  $order->buktibayar = $path;
+                  $order->save();
+                  return redirect() ->back() ->with('message','File berhasil diupload');
+              }
+            } else {
+                return redirect()->back()->with('message', 'Pilih file terlebih dahulu');
+            }
         }
     }
 
