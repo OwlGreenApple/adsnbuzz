@@ -34,11 +34,11 @@
 <body>
     <div class="container" >
         <div class="row" >
-            <div class="col-md-6 baloncont">
+            <div class="col-md-6 col-xs-12 baloncont">
                 <img class="balon" src="balon.png" />  
             </div>
 
-            <div class="col-md-6 loginboxcont">
+            <div class="col-md-6 col-xs-12 loginboxcont">
                 <div class="card bg-dark loginbox">
                     <div class="card-header fonthead" align="center">LOGIN</div>
 

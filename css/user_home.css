@@ -1,0 +1,102 @@
+a.tooltips {
+    position: relative;
+    display: inline;
+    text-decoration: none;
+}
+
+a.tooltips span {
+  position: absolute;
+  width:300px;
+  color: #FFFFFF;
+  background: #000000;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  visibility: hidden;
+  border-radius: 5px;
+}
+
+a.tooltips span:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 26%;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-bottom: 8px solid #000000;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+
+a:hover.tooltips span {
+  visibility: visible;
+  opacity: 0.6;
+  top: 30px;
+  left: 50%;
+  margin-left: -76px;
+  z-index: 999;
+}
+
+.tombolmenu{
+    position:relative; 
+    max-width: 95%;
+}
+
+.menu{
+  position: relative;
+  text-align: center;
+  font-family: 'FiraSansRegular';
+}
+
+.youraction{
+  color: white;
+  font-family: 'FiraSansMedium';
+  font-size: 25px;
+  padding: 10px 0px 0px 40px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 30%;
+  padding: 10px 15px 0px 15px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.daftarmenu {
+  background-color: white; 
+  float: left;
+  height: 600px;
+}
+
+.kontenmenu{
+  background-color: white;
+  background-image:url('../design/backgrounduserhome.jpg');
+  background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
+  background-size:cover;
+
+  float: right;
+  height: 600px;
+}
+
+.balondashboard {
+  max-width: 80%; 
+  text-align: center; 
+  margin-left: 10%; 
+  margin-top: 3%;
+}
+
+.hellouser {
+  position: absolute; 
+  top: 52%; 
+  left: 200px;
+}

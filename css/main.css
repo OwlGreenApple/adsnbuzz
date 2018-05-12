@@ -1,0 +1,18 @@
+@font-face { 
+	font-family: FiraSansMedium; 
+    src: url("../fonts/fira-sans.semibold.ttf");
+} 
+
+@font-face { 
+    font-family: FiraSansRegular; 
+    src: url("../fonts/fira-sans.regular.ttf");
+}
+
+label,p,li,td, button, .card-header {
+	font-family: FiraSansRegular;
+}
+
+h1 {
+ 	font-family: FiraSansMedium;
+ 	color: white;
+}
