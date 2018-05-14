@@ -45,7 +45,11 @@ class OrderController extends Controller
 
 	    	$orderall = Order::All();
 	    	$lastorder = collect($orderall)->last();
-	    	$tgllast = substr($lastorder->no_order, 0,8);
+
+	    	$tgllast = null;
+	    	if($lastorder!=null){
+	    		$tgllast = substr($lastorder->no_order, 0,8);
+	    	}
 
 	    	if($noorder==$tgllast){
 	    		$number = (int)substr($lastorder->no_order,8,3);
@@ -76,8 +80,8 @@ class OrderController extends Controller
 		} else {
 			//$user->deposit = $user->deposit - $request->spend;
 			if($request->spend!=$user->spend_month){
-				$user->spend_month = $request->spend;	
-				Mail::to('puspitanurhidayati@gmail.com')->queue(new MaxSpend($user->email,$user));
+				Mail::to('puspitanurhidayati@gmail.com')->queue(new MaxSpend($user->email,$user,$request->spend));
+				$user->spend_month = $request->spend;
 			}
 			$user->companycategory = $request->companycategory;
 			$user->save();

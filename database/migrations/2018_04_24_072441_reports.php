@@ -28,6 +28,7 @@ class Reports extends Migration
             $table->bigInteger('amountspent')->nullable();
             $table->string('ends')->nullable();
             $table->bigInteger('pta')->nullable();
+            $table->integer('agencyfee');
             $table->timestamp('created_at')->nullable();
         });
     }

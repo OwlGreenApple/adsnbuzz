@@ -20,7 +20,7 @@ class Allocations extends Migration
             $table->double('debit')->nullable();
             $table->double('kredit')->nullable();
             $table->string('description');
-            $table->double('totalbalance');
+            $table->double('totaldebit')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

@@ -22,13 +22,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/loginregis.css') }}" rel="stylesheet">
-
-<script type="text/javascript">
-        /*$(document).ready(function() {
-            $('.row').css('height',$( window ).height()+'px');
-
-        });*/
-</script>
 </head>
 
 <body>
@@ -38,7 +31,7 @@
                 <img class="balon" src="balon.png" />  
             </div>
 
-            <div class="col-md-6 col-xs-12 loginboxcont">
+            <div class="col-md-6 col-xs-12 boxcont">
                 <div class="card bg-dark loginbox">
                     <div class="card-header fonthead" align="center">LOGIN</div>
 

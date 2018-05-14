@@ -38,8 +38,7 @@ class ReportController extends Controller
 	    	window.location.href='adsnbuzz/public/report'; </script>";	
     	} else if($request->hasFile('filecsv')){
     		if($validator->fails()){
-    			echo "<script> alert('File yang Anda masukkan salah'); 
-	    		window.location.href='adsnbuzz/public/report'; </script>";
+    			return redirect()->back()->with('message', 'File yang Anda masukkan salah');
     		} else {
     			//dd($request->file('filecsv'));
 				$path = $request->file('filecsv')->getRealPath();
@@ -83,7 +82,7 @@ class ReportController extends Controller
 					if($user->deposit<=$user->spend_month){
 						Mail::to($user->email)->queue(new Deposit($user->email,$user->deposit));	
 					}
-					dd('Insert Record successfully.');
+					return redirect()->back()->with('message', 'File report berhasil diupload');
 				}
     		}
 		}

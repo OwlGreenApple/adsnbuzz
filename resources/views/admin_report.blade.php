@@ -4,6 +4,17 @@
 <div class="container py-4" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if(session()->has('message'))
+                @if(session()->get('message')=='File report berhasil diupload')
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @else
+                    <div class="alert alert-warning">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+            @endif
             <div class="card">
                 <div class="card-header">Report</div>
 

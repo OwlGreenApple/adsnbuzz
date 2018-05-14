@@ -9,6 +9,17 @@
 
         <div class="kontenmenu col-md-9 py-4" id="isiform">
             <div class="col-md-10 offset-md-1">
+            	@if(session()->has('message'))
+	            	@if(session()->get('message')=='File berhasil diupload')
+        				<div class="alert alert-success">
+        					{{ session()->get('message') }}
+        				</div>
+          			@else
+          				<div class="alert alert-warning">
+          					{{ session()->get('message') }}
+          				</div>
+          			@endif
+				@endif
                 <div class="card">
                 	<div class="card-header">Upload Bukti Bayar</div>
 
@@ -29,18 +40,6 @@
 		                   		<button type="submit" class="btn btn-primary"> Upload </button>
 		                   	</div>
 	                    </form>
-
-	                    @if(session()->has('message'))
-	                	    @if(session()->get('message')=='File berhasil diupload')
-        							    <div class="alert alert-success">
-        							        {{ session()->get('message') }}
-        							    </div>
-          							@else
-          								<div class="alert alert-warning">
-          							        {{ session()->get('message') }}
-          							    </div>
-          							@endif
-						          @endif
 	                </div>           
                 </div>    
             </div>

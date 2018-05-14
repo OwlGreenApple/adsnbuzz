@@ -22,16 +22,16 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/loginregis.css') }}" rel="stylesheet">
-
 </head>
+
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 baloncont">
+    <div class="container" >
+        <div class="row" >
+            <div class="col-md-6 col-xs-12 baloncont">
                 <img class="balon" src="balon.png" />  
             </div>
 
-            <div class="col-md-6 loginboxcont">
+            <div class="col-md-6 col-xs-12 boxcont">
                 <div class="card bg-dark regbox">
                     <div class="card-header fonthead" align="center">REGISTER</div>
 

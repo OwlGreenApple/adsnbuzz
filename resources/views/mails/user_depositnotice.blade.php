@@ -1,13 +1,7 @@
-<p>Hai,</p><br>
-<br>
-<p>Sisa balance Anda tinggal = Rp. {{ $balance }}</p><br>
-<br>
-<p>Harap Anda segera melakukan deposit agar pemesanan iklan segera dikerjakan.</p><br>
-<br>
-<p>Jika telah melakukan deposit, mohon abaikan email ini.</p><br>
-<br>
-<br>
-<p>Terima kasih,</p><br>
-<br>
+<p>Hai,</p>
+<p>Sisa balance Anda tinggal = Rp. {{ $balance }}</p>
+<p>Harap Anda segera melakukan deposit agar pemesanan iklan segera dikerjakan.</p>
+<p>Jika telah melakukan deposit, mohon abaikan email ini.</p>
+<p>Terima kasih,</p>
 <br>
 <p>Tim AdsnBuzz</p>
