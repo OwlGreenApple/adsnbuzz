@@ -12,11 +12,11 @@
             dataType : 'text',
             success: function(response) {
                 if(response=='invalid'){
-                    console.log("false");
-                    alert("Jumlah pesan terlalu besar. Silahkan deposit terlebih dahulu.");
+                  console.log("false");
+                  document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Jumlah pesan terlalu besar. Silahkan lakukan deposit terlebih dahulu.</div>';
                 } else {
-                    console.log("success");
-                    alert("Pesanan tersimpan");
+                  console.log("success");
+                  document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Perubahan max spend berhasil.</div>';
                 }
             }
         });
@@ -48,6 +48,15 @@
             selectize_tags.setValue(tags);
         }
     });
+
+    $(document).on({
+      ajaxStart: function() { 
+        document.getElementById("loader").style.display = "block";
+        $('div.overlay').addClass('background-load');},
+      ajaxStop: function() { 
+        document.getElementById("loader").style.display = "none"; 
+        $('div.overlay').removeClass('background-load');},
+    });
 </script>
 <div class="container-fluid">
     <div class="row">
@@ -57,6 +66,8 @@
 
         <div class="kontenmenu col-md-9 py-4" id="isiform">
             <div class="col-md-8 offset-md-2">
+                <div id="pesan">
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <form action="" id="formpesan">
@@ -88,6 +99,11 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endguest
 @endsection

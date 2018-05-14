@@ -11,20 +11,28 @@
             success: function(response) {
                 if(response=='not-valid'){
                     console.log("false");
-                    alert("Masukkan diskon antara 0 - 100 untuk tipe persen.")
+                     document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Masukkan diskon antara 0 - 100 untuk tipe persen. </div>';
                 } else {
                     console.log("success");
-                    $("#pesan").addClass("alert alert-success alert-dismissible");
-                    $("#pesan").append('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>');
-                    $("#pesan").append("<strong>Success!</strong> Kupon berhasil diupdate.");
+                     document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Kupon berhasil diupdate. </div>';
                 }
             }
         });
     }
+
+    $(document).on({
+      ajaxStart: function() { 
+        document.getElementById("loader").style.display = "block";
+        $('div.overlay').addClass('background-load');},
+      ajaxStop: function() { 
+        document.getElementById("loader").style.display = "none"; 
+        $('div.overlay').removeClass('background-load');},
+    });
 </script>
 <div class="container py-4" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-8">
+          <div id="pesan"></div>
             <div class="card" style="margin-bottom: 20px;">
                 <div class="card-header">Edit Coupon</div>
 
@@ -60,10 +68,12 @@
                     </form>
                 </div>      
             </div>
-
-            <div id="pesan">  
-            </div>
         </div>
     </div>
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endsection

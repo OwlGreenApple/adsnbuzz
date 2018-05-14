@@ -11,16 +11,26 @@
 			data : $('form').serialize(),
 			dataType : 'json',
 			success: function(data) {
-				if(data=='failed'){
-					alert("Kode kupon tidak ditemukan");
+				if(data.status=='failed'){
+          document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Kode kupon tidak ditemukan. </div>';
 				} else {
 					console.log("success");
 					//$("#isiform").reset();
 					document.getElementById("isidata").innerHTML = "<p>Order telah tersimpan.<br> Silahkan lakukan pembayaran terlebih dahulu.</p><p><strong>Detail Deposit</strong>: </p><p>Tanggal order = "+ data.tgl_order +"</p><p>Jumlah deposit = " + data.jml_order + "</p><p>Kode kupon = " + data.kodekupon + "</p><p>Total harga = " + data.totalharga + "</p>";
+          document.getElementById("pesan").innerHTML = '';
 				}
 			}
 		});
 	}
+
+  $(document).on({
+    ajaxStart: function() { 
+      document.getElementById("loader").style.display = "block";
+      $('div.overlay').addClass('background-load');},
+    ajaxStop: function() { 
+      document.getElementById("loader").style.display = "none"; 
+      $('div.overlay').removeClass('background-load');},
+  });
 </script>
 
 <div class="container-fluid">
@@ -31,6 +41,9 @@
 
 	    <div class="kontenmenu col-md-9 py-4" id="isiform">
 	    	<div class="col-md-8 offset-md-2">
+          <div id="pesan">
+            
+          </div>
 	            <div class="card">
 	                <div class="card-header">Deposit</div>
 
@@ -76,6 +89,11 @@
 	        </div>    
     	</div>	
 	</div>	
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endguest
 @endsection

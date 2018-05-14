@@ -19,8 +19,8 @@ class Allocations extends Migration
             $table->bigInteger('order_id')->nullable();
             $table->double('debit')->nullable();
             $table->double('kredit')->nullable();
-            $table->string('description');
             $table->double('totaldebit')->nullable();
+            $table->string('description');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

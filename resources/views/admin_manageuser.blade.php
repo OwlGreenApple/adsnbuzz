@@ -10,13 +10,14 @@
             dataType : 'json',
             success: function(data) {
                 if(document.getElementById('search').value != "") {
-                    console.log(data.status=="not-found");
                     if(data.status=="not-found"){
                         console.log("failed");
                         $('#tabeluser').empty();
+                         document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> User tidak ditemukan. </div>';
                     } else {
                         console.log("success");
                         $('#tabeluser').empty();
+                         document.getElementById("pesan").innerHTML = '';
 
                         var trHTML = '';
                         trHTML += '<tr><td>' + data.isi.id + '</td><td>' + data.isi.name + '</td><td>' + data.isi.email + '</td><td>' + data.isi.spend_month + '</td><td>' + data.isi.deposit + '</td><td align="center"><form action="<?php echo url('/report'); ?>' +'/'+ data.isi.id +'"> @csrf<button type="submit" class="btn btn-primary">Upload</button></form></td><td align="center"><form action="<?php echo url('/manage-user/login'); ?>' +'/'+ data.isi.id +'" method="post"> @csrf<button type="submit" class="btn btn-primary">Login</button></form></td></tr>';
@@ -28,10 +29,20 @@
             }
         });
     }
+
+    $(document).on({
+      ajaxStart: function() { 
+        document.getElementById("loader").style.display = "block";
+        $('div.overlay').addClass('background-load');},
+      ajaxStop: function() { 
+        document.getElementById("loader").style.display = "none"; 
+        $('div.overlay').removeClass('background-load');},
+    });
 </script>
 <div class="container py-4" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-10">
+          <div id="pesan"> </div>
             <div class="card">
                 <div class="card-header">User Management</div>
 
@@ -80,5 +91,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endsection

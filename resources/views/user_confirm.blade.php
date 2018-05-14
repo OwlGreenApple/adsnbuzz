@@ -3,9 +3,9 @@
 @section('content')
 <script type="text/javascript">
 	$( "body" ).on( "click", ".popup-newWindow", function() {
-        event.preventDefault();
-        window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
-      });
+    event.preventDefault();
+    window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
+  });
 
 	function cari(){
         $.ajax({
@@ -19,9 +19,11 @@
                     if(data.status=="not-found"){
                         console.log("failed");
                         $('#tabelorder').empty();
+                        document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Data order tidak ditemukan. </div>';
                     } else {
                         console.log("success");
                         $('#tabelorder').empty();
+                        document.getElementById("pesan").innerHTML = '';
 
                        var trHTML = '';
 		                trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.totalharga + '</td><td align="center"><form action="<?php echo url('/confirm-user'); ?>' +'/'+ data.isi.id +'"><button type="submit" class="btn btn-primary"> Upload </button></form></td>';
@@ -49,6 +51,15 @@
             }
         });
     }
+
+    $(document).on({
+      ajaxStart: function() { 
+        document.getElementById("loader").style.display = "block";
+        $('div.overlay').addClass('background-load');},
+      ajaxStop: function() { 
+        document.getElementById("loader").style.display = "none"; 
+        $('div.overlay').removeClass('background-load');},
+    });
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -57,6 +68,7 @@
 	    </div>
 
 	    <div class="kontenmenu col-md-9 py-4" id="isiform">
+        <div id="pesan"></div>
 	        <div class="card">
 	       		<div class="card-header">Confirm Payment</div>
 
@@ -113,5 +125,10 @@
 	        </div>    
     	</div>	
 	</div>	
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endsection

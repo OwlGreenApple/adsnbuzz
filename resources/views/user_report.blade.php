@@ -11,7 +11,7 @@
     }
 
     function viewData(){
-    $.ajax({
+      $.ajax({
         type : 'POST',
         url : "{{url('/report-user/'.Auth::user()->id)}}",
         data : $('form').serialize(),
@@ -28,21 +28,31 @@
                     trHTML += '<tr><th>Start</th><td>'+item.report_starts+'</td></tr><tr><th>End</th><td>'+item.report_ends+'</td></tr><tr><th>Campaign Name</th><td>'+replacenull(item.campaignname)+'</td></tr><tr><th>Result</th><td>'+replacenull(item.results)+'</td></tr><tr><th>Result Indicator</th><td>'+replacenull(item.result_ind)+'</td></tr><tr><th>Reach</th><td>'+replacenull(item.reach)+'</td></tr><tr><th>Impression</th><td>'+replacenull(item.impressions)+'</td></tr><tr><th>Cost per Result</th><td>'+replacenull(item.cost)+'</td></tr><tr><th>Amount Spent</th><td>'+replacenull(item.amountspent)+'</td></tr><tr><th>People Taking Action</th><td>'+replacenull(item.pta)+'</td></tr><tr style="height:30px;"></tr>';
                 });
                 document.getElementById("isidata").innerHTML = trHTML;
+                document.getElementById("pesan").innerHTML = '';
             } else {
                 console.log("notfound");
+                document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Data report tidak ditemukan. </div>'
                 $('#isidata tbody').empty();
-            }
-            
+            } 
         }
-    });
-}
+      });
+    }
+
+  $(document).on({
+    ajaxStart: function() { 
+      document.getElementById("loader").style.display = "block";
+      $('div.overlay').addClass('background-load');},
+    ajaxStop: function() { 
+      document.getElementById("loader").style.display = "none"; 
+      $('div.overlay').removeClass('background-load');},
+  });
 </script>
 
 <style type="text/css">
     thead, tbody { display: block; }
 
     tbody {
-        height: 380px;       /* Just for the demo          */
+        height: 340px;       /* Just for the demo          */
         overflow-y: auto;    /* Trigger vertical scroll    */
         overflow-x: auto;  /* Hide the horizontal scroll */
     }
@@ -64,6 +74,9 @@
 
         <div class="kontenmenu col-md-9 py-4" id="isiform">
             <div class="col-md-10 offset-md-1">
+              <div id="pesan">
+                
+              </div>
                 <div class="card">
                     <div class="card-header"> Report </div>
 
@@ -93,46 +106,9 @@
 
                         <div class="row col-md-10" style="margin-left: 10px;">
                             <table class="table table-bordered table-striped table-responsive" id="isidata">
-                                <tr>
-                                    <th>Start</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>End</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Campaign Name</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Result</th>
-                                    <td></td>
-                                </tr>    
-                                <tr>
-                                    <th>Result Indicator</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Reach</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Impression</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Cost per Result</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Amount Spent</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>People Taking Action</th>
-                                    <td></td>
-                                </tr>
+                              <tbody>
+                                
+                              </tbody>
                             </table>
                         </div>        
                     </div>
@@ -140,5 +116,10 @@
             </div>
         </div>  
     </div>  
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endsection

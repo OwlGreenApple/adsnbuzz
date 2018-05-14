@@ -10,9 +10,9 @@
             dataType : 'text',
             success: function(response) {
                 console.log("success");
-                alert("Pesanan sudah terkonfirmasi");
+                document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Pesanan berhasil dikonfirmasi. </div>';
 			}
-        });
+    });
 	}
 
 	$( "body" ).on( "click", ".confirm", function() {
@@ -28,7 +28,7 @@
 	            dataType : 'text',
 	            success: function(response) {
 	                console.log("success");
-	                alert("Pesanan sudah di unkonfirmasi");
+	                document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Pesanan berhasil diunkonfirmasi. </div>';
 	            }
 	        });
 	    }
@@ -47,7 +47,7 @@
 	            dataType : 'text',
 	            success: function(response) {
 	                console.log("success");
-	                alert("Pesanan sudah direject");
+	                document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Pesanan berhasil direject. </div>';
 	            }
 	        });
 	    }
@@ -65,7 +65,7 @@
 	        dataType : 'text',
 	        success: function(response) {
 	            console.log("success");
-	            alert("Pesanan berhasil di unreject");
+	            document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Pesanan berhasil diunreject. </div>';
 	        }
 	    });
 	}
@@ -85,9 +85,11 @@
                     if(data.status=="not-found"){
                         console.log("failed");
                         $('#tabelorder').empty();
+                        document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Data order tidak ditemukan. </div>';
                     } else {
                         console.log("success");
                         $('#tabelorder').empty();
+                        document.getElementById("pesan").innerHTML = '';
 
                         var trHTML = '';
 	                	trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.user_id + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.totalharga + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.opsibayar + '</td>';
@@ -124,10 +126,21 @@
         event.preventDefault();
         window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
       });
+
+  $(document).on({
+    ajaxStart: function() { 
+      document.getElementById("loader").style.display = "block";
+      $('div.overlay').addClass('background-load');},
+    ajaxStop: function() { 
+      document.getElementById("loader").style.display = "none"; 
+      $('div.overlay').removeClass('background-load');},
+  });
 </script>
 <div class="container py-4" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-13">
+            <div id="pesan">
+            </div>
             <div class="card">
                 <div class="card-header menuheader">Confirm Payment</div>
 
@@ -193,5 +206,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endsection

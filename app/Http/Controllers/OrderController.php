@@ -30,8 +30,9 @@ class OrderController extends Controller
     	}
 
     	if ($kodekupon!="-" && is_null($coupon)){
-			return "failed";
-		}
+			  $arr['status'] = "failed";
+        return $arr;
+		  }
 		else {
 			if($kodekupon=="-"){
 				$totalharga = $request->jml_order;

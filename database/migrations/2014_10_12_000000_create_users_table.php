@@ -19,11 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
             $table->boolean('admin')->default(0);
             $table->double('deposit')->nullable();
             $table->string('companycategory')->nullable();
             $table->double('spend_month')->default(0);
+            $table->timestamps();
         });
     }
 

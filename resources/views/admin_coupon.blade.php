@@ -2,23 +2,30 @@
 
 @section('content')
 <script type="text/javascript">
-    function deleteData(id,row){
-        if(confirm("Are you sure want to delete?")) {
-            $.ajax({
-                    type : 'DELETE',
-                    url : "<?php echo url('/coupon'); ?>"+'/'+id,
-                    data: { "_token": "{{ csrf_token() }}" },
-                    //dataType : 'text',
-                    success: function(response) {
-                        console.log("success");
-                        alert("Kupon berhasil dihapus");
-                        
-                        var el = row.parentNode.parentNode.rowIndex;
-                        document.getElementById("tabelkupon").deleteRow(el);
-                    }
-            });
+  function deleteData(id,row){
+    if(confirm("Are you sure want to delete?")) {
+      $.ajax({
+        type : 'DELETE',
+        url : "<?php echo url('/coupon'); ?>"+'/'+id,
+        data: { "_token": "{{ csrf_token() }}" },
+        //dataType : 'text',
+        beforeSend: function(){
+          document.getElementById("loader").style.display = "block";
+          $('div.overlay').addClass('background-load');  
+        },
+        success: function(response) {
+          console.log("success");
+          document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Kupon berhasil dihapus. </div>';
+
+          document.getElementById("loader").style.display = "none"; 
+          $('div.overlay').removeClass('background-load');
+
+          var el = row.parentNode.parentNode.rowIndex;
+          document.getElementById("tabel").deleteRow(el);
         }
+      });
     }
+  }
 
     function cari(){
         $.ajax({
@@ -26,15 +33,20 @@
             url : "<?php echo url('/coupon'); ?>"+'/'+ document.getElementById('search').value,
             data : $('form').serialize(),
             dataType : 'json',
+            beforeSend: function(){
+              document.getElementById("loader").style.display = "block";
+              $('div.overlay').addClass('background-load');  
+            },
             success: function(data) {
                 if(document.getElementById('search').value != "") {
-                    console.log(data.status=="not-found");
                     if(data.status=="not-found"){
                         console.log("failed");
                         $('#tabelkupon').empty();
+                         document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Kupon tidak ditemukan. </div>';
                     } else {
                         console.log("success");
                         $('#tabelkupon').empty();
+                         document.getElementById("pesan").innerHTML = '';
 
                         var trHTML = '';
                         trHTML += '<tr><td>' + data.isi.kodekupon + '</td><td>' + data.isi.diskon + '</td><td>' + data.isi.tipekupon + '</td><td align="center"><form action="<?php echo url('/coupon'); ?>' +'/'+ data.isi.id +'/edit"><button class="btn btn-primary">Update</form></td><td align="center"><button class="btn btn-danger" onclick="deleteData('+ data.isi.id +',this)">Delete</td></tr>';
@@ -43,6 +55,8 @@
                         console.log(trHTML);
                     }
                 }
+              document.getElementById("loader").style.display = "none"; 
+              $('div.overlay').removeClass('background-load');
             }
         });
     }
@@ -50,6 +64,9 @@
 <div class="container" id="isiform">
     <div class="row justify-content-center">
         <div class="col-md-8 py-4">
+          <div id="pesan">
+            
+          </div>
             <div class="card">
                 <div class="card-header">Coupon Management</div>
 
@@ -68,7 +85,7 @@
                     </form>
                     
                     <div class="tabel">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered" id="tabel">
                             <thead style="text-align: center;">
                                 <tr>
                                     <th>Kode Kupon</th>
@@ -96,5 +113,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="overlay">
+  <div id="loader" style="display: none;">
+  </div>  
 </div>
 @endsection
