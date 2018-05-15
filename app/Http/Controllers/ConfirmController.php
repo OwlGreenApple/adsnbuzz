@@ -44,7 +44,7 @@ class ConfirmController extends Controller
                 $arr['url'] = null;
             } else {
                 //$arr['url'] = url(Storage::url($order->buktibayar));
-                $arr['url'] = url('/storage/app/'.$order->buktibayar);
+                $arr['url'] = url($order->buktibayar);
             }
         }
         return $arr;
@@ -68,7 +68,8 @@ class ConfirmController extends Controller
                   //$path = $uploadedFile->store('public/buktibayar');
                   $path = $uploadedFile->store('buktibayar');
                   
-                  $order->buktibayar = $path;
+                  $order->buktibayar = '/storage/app/'.$path;
+                  //dd($order->buktibayar);
                   $order->save();
                   return redirect() ->back() ->with('message','File berhasil diupload');
               }
