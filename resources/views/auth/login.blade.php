@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
      <!-- Link Icon -->
-    <link rel='shortcut icon' type='image/png' href='icon.png'>
+    <link rel='shortcut icon' type='image/png' href="{{ asset('design/icon.png') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -29,7 +29,7 @@
     <div class="container" >
         <div class="row" >
             <div class="col-md-6 col-xs-12 baloncont">
-                <img class="balon" src="balon.png" />  
+                <img class="balon" src="{{ asset('design/balon.png') }}" />  
             </div>
 
             <div class="col-md-6 col-xs-12 boxcont">

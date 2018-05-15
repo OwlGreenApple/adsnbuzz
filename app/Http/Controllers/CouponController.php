@@ -18,15 +18,31 @@ class CouponController extends Controller
     }
 
     public function store(Request $request){
-    	if($request->tipekupon=='Persen' && $request->diskon>100){
-    		return 'not-valid';
+      //dd(preg_match('/^[1-9][0-9]*$/',$request->diskon));
+      if($request->diskon=='' || $request->kodekupon==''){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Isi form terlebih dahulu.';
+      }
+      else if(preg_match('/^[1-9][0-9]*$/',$request->diskon)!=1){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Masukkan input hanya angka pada form diskon.';
+        //return 'not-valid';
+      } else if($request->tipekupon=='Persen' && $request->diskon>100){
+    		$arr['status'] = 'error';
+        $arr['message'] = 'Masukkan diskon antara 0 - 100 untuk tipe persen.';
+        //return 'not-valid';
     	} else {
     		$kupon 				= new Coupon;
 	    	$kupon->kodekupon 	= $request->kodekupon;
 	    	$kupon->tipekupon	= $request->tipekupon;
 	    	$kupon->diskon		= $request->diskon;
 	    	$kupon->save();
+
+        $arr['status'] = 'success';
+        $arr['message'] = '';
     	}
+
+      return $arr;
     }
 
     public function show($id){
@@ -47,15 +63,29 @@ class CouponController extends Controller
     }
 
     public function update(Request $request, $id){
-    	if($request->tipekupon=='Persen' && $request->diskon>100) {
-    		return 'not-valid';
-    	} else {
+    	if($request->diskon=='' || $request->kodekupon==''){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Isi form terlebih dahulu.';
+      }
+      else if(preg_match('/^[1-9][0-9]*$/',$request->diskon)!=1){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Masukkan input hanya angka pada form diskon.';
+        //return 'not-valid';
+      } else if($request->tipekupon=='Persen' && $request->diskon>100){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Masukkan diskon antara 0 - 100 untuk tipe persen.';
+        //return 'not-valid';
+      } else {
     		$coupon = Coupon::find($id);
 	    	$coupon->kodekupon 	= $request->kodekupon;
 	    	$coupon->tipekupon 	= $request->tipekupon;
 	    	$coupon->diskon		= $request->diskon;
 	    	$coupon->save();
+
+        $arr['status'] = 'success';
+        $arr['message'] = '';
     	}
+      return $arr;
     }
 
     public function destroy($id){

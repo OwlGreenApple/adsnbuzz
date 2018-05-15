@@ -77,7 +77,7 @@
                                     <label for="spend" class="col-md-4 text-md-right"> Setup Spend Bulan 1 </label>
                                 @else 
                                     <label for="spend" class="col-md-4 text-md-right"> Max Spend </label>
-                                    <a class="tooltips"><img src="blue_question_mark.png" height="13px">
+                                    <a class="tooltips"><img src="{{ asset('design/blue_question_mark.png') }}" height="13px">
                                     <span>Perubahan Max Spend berlaku bulan depan</span></a>
                                 @endif
                                 <input type="text" class="form-control" id="spend" name="spend" style="margin-left: 10px; width: 274px;" value="{{ $user->spend_month}}">

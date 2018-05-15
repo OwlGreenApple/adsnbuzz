@@ -7,11 +7,11 @@
             type : 'PUT',
             url : "<?php echo url('/coupon'); ?>"+'/'+id,
             data : $('form').serialize(),
-            dataType : 'text',
-            success: function(response) {
-                if(response=='not-valid'){
+            dataType : 'json',
+            success: function(data) {
+                if(data.status=='error'){
                     console.log("false");
-                     document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> Masukkan diskon antara 0 - 100 untuk tipe persen. </div>';
+                     document.getElementById("pesan").innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> '+data.message+'</div>';
                 } else {
                     console.log("success");
                      document.getElementById("pesan").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Kupon berhasil diupdate. </div>';

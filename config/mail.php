@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'puspita.celebgramme@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Puspitasari Nurhidayati'),
+        'name' => env('MAIL_FROM_NAME', 'Ads&Buzz'),
     ],
 
     /*

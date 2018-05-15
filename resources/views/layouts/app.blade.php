@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
      <!-- Link Icon -->
-    <link rel='shortcut icon' type='image/png' href="{{ asset('icon.png') }}">
+    <link rel='shortcut icon' type='image/png' href="{{ asset('design/icon.png') }}">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -51,14 +51,14 @@
                                 <!-- Authentication Links -->
                                 <li>
                                     <a class="nav-brand" href="{{ url('/') }}">
-                                        <img src="{{ asset('logo.png') }}" style="position:relative; max-width: 60%; margin-bottom: 10px;">
+                                        <img src="{{ asset('design/logo.png') }}" style="position:relative; max-width: 60%; margin-bottom: 10px;">
                                     </a>     
                                 </li>
                             </ul>
                         @else 
                             <!-- Left Side Of Navbar -->
                             <a class="nav-brand col-md-1" href="{{ url('/') }}">
-                                <img src="{{ asset('logo.png') }}" style="max-width: 170%;">
+                                <img src="{{ asset('design/logo.png') }}" style="max-width: 170%;">
                             </a>
                             <ul class="navbar-nav mr-auto" style="margin-left: 70px;">
                                 <!-- Authentication Admin login redirect menu admin -->

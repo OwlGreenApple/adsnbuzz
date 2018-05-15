@@ -34,11 +34,10 @@ class ReportController extends Controller
     	]);
 
     	if($request->agencyfee>100){
-	    	echo "<script> alert('Masukkan agency fee antara 0 - 100%'); 
-	    	window.location.href='adsnbuzz/public/report'; </script>";	
+	    	return redirect()->back()->with('message', 'Masukkan agency fee antara 0 - 100%.');
     	} else if($request->hasFile('filecsv')){
     		if($validator->fails()){
-    			return redirect()->back()->with('message', 'File yang Anda masukkan salah');
+    			return redirect()->back()->with('message', 'File yang Anda masukkan salah.');
     		} else {
     			//dd($request->file('filecsv'));
 				$path = $request->file('filecsv')->getRealPath();

@@ -104,7 +104,8 @@
 	                    				@endif
 
 	                    				@if ($order->buktibayar!=null)
-	                    					<td align="center"><a class="popup-newWindow" href="{{ url(Storage::url($order->buktibayar)) }}">View</a></td>
+	                    					<!--<td align="center"><a class="popup-newWindow" href="{{ url(Storage::url($order->buktibayar)) }}">View</a></td>-->
+                                <td align="center"><a class="popup-newWindow" href="{{ url('/storage/app/'.$order->buktibayar) }}">View</a></td>
 	                    				@else 
 	                    					<td align="center">-</td>
 	                    				@endif

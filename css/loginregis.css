@@ -5,7 +5,7 @@
 
         body {
             background-color: #cccccc;
-            background-image:url('../ads&buzz home image 60 ocp.jpg');
+            background-image:url('../design/ads&buzz home image 60 ocp.jpg');
             background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
             background-size:cover;
         }

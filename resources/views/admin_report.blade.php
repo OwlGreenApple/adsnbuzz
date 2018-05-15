@@ -7,11 +7,13 @@
             @if(session()->has('message'))
                 @if(session()->get('message')=='File report berhasil diupload')
                     <div class="alert alert-success">
+                        <strong>Success!</strong>
                         {{ session()->get('message') }}
                     </div>
                 @else
                     <div class="alert alert-warning">
-                        {{ session()->get('message') }}
+                      <strong>Warning!</strong>
+                      {{ session()->get('message') }}
                     </div>
                 @endif
             @endif
