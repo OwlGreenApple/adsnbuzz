@@ -90,6 +90,8 @@ class ConfirmController extends Controller
         $orders = DB::table('orders')
                   ->join('users','orders.user_id','=','users.id')
                   ->select('orders.*','users.email')
+                  ->orderBy('konfirmasi', 'asc')
+                  ->orderBy('id', 'desc')
                   ->paginate(5);
     	return view('admin_confirm')->with('orders',$orders);
     }
