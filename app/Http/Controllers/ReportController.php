@@ -33,12 +33,25 @@ class ReportController extends Controller
     		'filecsv' => 'mimes:csv,txt',
     	]);
 
-    	if($request->agencyfee>100){
-	    	return redirect()->back()->with('message', 'Masukkan agency fee antara 0 - 100%.');
-    	} else if($request->hasFile('filecsv')){
-    		if($validator->fails()){
-    			return redirect()->back()->with('message', 'File yang Anda masukkan salah.');
-    		} else {
+      if($request->agencyfee=='' || !$request->hasFile('filecsv')){
+        $arr['status']='error';
+        $arr['message']='Isi form terlebih dahulu';
+        //return redirect()->back()->with('message', 'Isi form terlebih dahulu.');
+      }
+      else if(preg_match('/^[1-9][0-9]*$/',$request->agencyfee)!=1){
+        $arr['status']='error';
+        $arr['message']='Masukkan input hanya angka pada form diskon';
+        //return redirect()->back()->with('message', 'Masukkan input hanya angka pada form diskon.');
+      }
+    	else if($request->agencyfee>100){
+        $arr['status']='error';
+        $arr['message']='Masukkan agency fee antara 0 - 100%.';
+	    	//return redirect()->back()->with('message', 'Masukkan agency fee antara 0 - 100%.');
+    	} else if($validator->fails()){
+        $arr['status']='error';
+        $arr['message']='File yang Anda masukkan salah.';
+    		//return redirect()->back()->with('message', 'File yang Anda masukkan salah.');
+    	} else {
     			//dd($request->file('filecsv'));
 				$path = $request->file('filecsv')->getRealPath();
 				$data = Excel::load($path)->get();
@@ -81,11 +94,13 @@ class ReportController extends Controller
 					if($user->deposit<=$user->spend_month){
 						Mail::to($user->email)->queue(new Deposit($user->email,$user->deposit));	
 					}
-					return redirect()->back()->with('message', 'File report berhasil diupload');
+          $arr['status']='success';
+          $arr['message']='File report berhasil diupload.';
+					//return redirect()->back()->with('message', 'File report berhasil diupload');
 				}
-    		}
+    	}
+      return $arr;
 		}
-    }
 
     public function showData(Request $request, $id){
     	//dd($request->tglmulai);

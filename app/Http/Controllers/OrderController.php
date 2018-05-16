@@ -76,9 +76,16 @@ class OrderController extends Controller
 	public function pesan(Request $request,$id){
 		$user = User::find($id);
 
-		if($request->spend > $user->deposit){
-			return "invalid";
-		} else {
+		if($request->spend==''){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Isi form terlebih dahulu.';
+    } else if($request->spend > $user->deposit){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Jumlah spend terlalu besar. Silahkan lakukan deposit terlebih dahulu.';
+		} else if(preg_match('/^[1-9][0-9]*$/',$request->spend)!=1){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Masukkan input hanya angka pada form max spend.';
+    }else {
 			//$user->deposit = $user->deposit - $request->spend;
 			if($request->spend!=$user->spend_month){
 				Mail::to('puspitanurhidayati@gmail.com')->queue(new MaxSpend($user->email,$user,$request->spend));
@@ -87,8 +94,11 @@ class OrderController extends Controller
 			$user->companycategory = $request->companycategory;
 			$user->save();
 
-			return "valid";
+      $arr['status']='success';
+      $arr['message']='Max spend berhasil dirubah.';
 		}
+
+    return $arr;
 
 	}
 

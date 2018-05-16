@@ -55,7 +55,7 @@
 	</div>
 
 	<div class="column">
-		<?php if((url()->current() == url('/confirm-user')) or (url()->current() == url('/confirm-user/{id}'))) { ?>
+		<?php if(strpos(url()->current(),'confirm-user')) { ?>
 			<a href="{{ url('/confirm-user') }}"><img src="{{ asset('design/confirm-payment.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
 			<a href="{{ url('/confirm-user') }}"><img src="{{ asset('design/confirm-payment-hover.png') }}" class="tombolmenu"></a> 

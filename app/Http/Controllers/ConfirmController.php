@@ -52,32 +52,38 @@ class ConfirmController extends Controller
 
     public function uploadBukti(Request $request,$id){
         $validator = Validator::make($request->all(), [
-            'buktibayar' => 'mimes:jpg,jpeg,png,bmp|required|file|max:2000',
+          'buktibayar'=>'mimes:jpg,jpeg,png,bmp|file|max:2000',
         ]);
 
         $order = Order::find($id);
 
         if($order->konfirmasi==1){
-          return redirect()->back()->with('message', 'Pesanan Anda telah dikonfirmasi oleh admin');    
+          $arr['status'] = 'error';
+          $arr['message'] = 'Pesanan Anda telah dikonfirmasi oleh admin.';
+          //return redirect()->back()->with('message', 'Pesanan Anda telah dikonfirmasi oleh admin');    
+        } else if(!$request->hasFile('buktibayar')){
+          $arr['status'] = 'error';
+          $arr['message'] = 'Pilih file terlebih dahulu.';
+          //return redirect()->back()->with('message', 'Pilih file terlebih dahulu');
+        } else if($validator->fails()){
+          $arr['status'] = 'error';
+          $arr['message'] = 'File yang Anda masukkan salah.';
+          //return redirect()->back()->with('message', 'File yang Anda masukkan salah');
         } else {
-            if($request->hasFile('buktibayar')){
-              if($validator->fails()){
-                  return redirect()->back()->with('message', 'File yang Anda masukkan salah');
-              } else {
-                  $uploadedFile = $request->file('buktibayar');        
-                  //$path = $uploadedFile->store('public/buktibayar');
-                  $path = $uploadedFile->store('buktibayar');
+          $uploadedFile = $request->file('buktibayar');        
+          //$path = $uploadedFile->store('public/buktibayar');
+          $path = $uploadedFile->store('buktibayar');
                   
-                  $order->buktibayar = '/storage/app/'.$path;
-                  //dd($order->buktibayar);
-                  $order->save();
-                  return redirect() ->back() ->with('message','File berhasil diupload');
-              }
-            } else {
-                return redirect()->back()->with('message', 'Pilih file terlebih dahulu');
-            }
+          $order->buktibayar = '/storage/app/'.$path;
+          //dd($order->buktibayar);
+          $order->save();
+
+          $arr['status'] = 'success';
+          $arr['message'] = 'File bukti bayar berhasil diupload.';
+          //return redirect() ->back() ->with('message','File berhasil diupload');
         }
-    }
+        return $arr;
+    } 
 
     public function confirmAdminView(){
     	//$orders = Order::orderBy('konfirmasi', 'asc')->orderBy('id', 'desc')->paginate(5);

@@ -9,8 +9,7 @@ class CouponController extends Controller
 {
     public function index(){
     	$coupons = Coupon::paginate(5);
-       	return view('admin_coupon')
-       	       ->with('coupons',$coupons);
+      return view('admin_coupon')->with('coupons',$coupons);
     }
 
     public function create(){
@@ -90,6 +89,6 @@ class CouponController extends Controller
 
     public function destroy($id){
     	$coupon = Coupon::find($id);
-        $coupon->delete();
+      $coupon->delete();
     }
 }
