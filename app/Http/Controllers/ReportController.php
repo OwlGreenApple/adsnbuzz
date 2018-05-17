@@ -28,6 +28,11 @@ class ReportController extends Controller
     	return view('user_report')->with('user',Auth::user());
     }
 
+    public function viewreport($id){
+      $user = User::find($id);
+      return view('admin_viewreport')->with('user',$user);
+    }
+
     public function savecsv(Request $request){
     	$validator = Validator::make($request->all(), [
     		'filecsv' => 'mimes:csv,txt',
@@ -109,7 +114,7 @@ class ReportController extends Controller
               ->where("report_starts",'<=',$request->tglakhir)
               ->where("report_ends",'>=',$request->tglmulai)
     				    ->where("report_ends",'<=',$request->tglakhir)->get();
-    	//dd($data);
+      //dd($data);
     	if ($data->isEmpty()){
   			$arr["status"] = 'not-found';
   			$arr['isi'] = "";
@@ -120,5 +125,10 @@ class ReportController extends Controller
   			$arr['isi'] = $data;
   			return $arr;    
   		}
+    }
+
+    public function deletereport ($id){
+      $report = Report::find($id);
+      $report->delete();
     }
 }

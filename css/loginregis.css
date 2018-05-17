@@ -60,7 +60,7 @@
             max-width: 90%;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 900px) {
           .boxcont {
             padding-left:30px;    
           }
@@ -85,6 +85,7 @@
             background-repeat:repeat-y;
           }
         }
+
         .fonthead {
             color:white;
             font-size: 20px;

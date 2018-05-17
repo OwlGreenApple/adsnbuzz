@@ -42,6 +42,9 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 	Route::resource('coupon','CouponController');
   Route::get('/report/{id}','ReportController@index');
 	Route::post('/report/save','ReportController@savecsv');
+  Route::get('/viewreport/{id}','ReportController@viewreport');
+  Route::post('/viewreport/view/{id}','ReportController@showData');
+  Route::delete('/deletereport/{id}','ReportController@deletereport');
 	Route::get('/confirm-admin','ConfirmController@confirmAdminView');
 	Route::get('/confirm/save','ConfirmController@confirmAdmin');
 	Route::get('/confirm/unsave','ConfirmController@unconfirmAdmin');
