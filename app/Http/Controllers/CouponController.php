@@ -8,7 +8,7 @@ use AdsnBuzz\Coupon;
 class CouponController extends Controller
 {
     public function index(){
-    	$coupons = Coupon::paginate(5);
+    	$coupons = Coupon::orderBy('id', 'desc')->paginate(5);
       return view('admin_coupon')->with('coupons',$coupons);
     }
 
@@ -21,14 +21,17 @@ class CouponController extends Controller
       if($request->diskon=='' || $request->kodekupon==''){
         $arr['status'] = 'error';
         $arr['message'] = 'Isi form terlebih dahulu.';
+        $arr['isi'] = '';
       }
       else if(preg_match('/^[1-9][0-9]*$/',$request->diskon)!=1){
         $arr['status'] = 'error';
         $arr['message'] = 'Masukkan input hanya angka pada form diskon.';
+        $arr['isi'] = '';
         //return 'not-valid';
       } else if($request->tipekupon=='Persen' && $request->diskon>100){
     		$arr['status'] = 'error';
         $arr['message'] = 'Masukkan diskon antara 0 - 100 untuk tipe persen.';
+        $arr['isi'] = '';
         //return 'not-valid';
     	} else {
     		$kupon 				= new Coupon;
@@ -39,6 +42,7 @@ class CouponController extends Controller
 
         $arr['status'] = 'success';
         $arr['message'] = '';
+        $arr['isi'] = $kupon;
     	}
 
       return $arr;

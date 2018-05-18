@@ -18,12 +18,14 @@
     <link href="{{ asset('css/user_home.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('DataTables/datatables.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/ui/jquery-ui.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('selectize/selectize.js') }}"></script>
     <script src="{{ asset('DataTables/datatables.js') }}"></script>
+    <script src="{{ asset('js/ui/jquery-ui.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">

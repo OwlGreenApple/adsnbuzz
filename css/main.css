@@ -8,7 +8,7 @@
     src: url("../fonts/fira-sans.regular.ttf");
 }
 
-label,p,li,td, button, .card-header {
+label,p,li,td, button, .card-header{
 	font-family: FiraSansRegular;
 }
 
