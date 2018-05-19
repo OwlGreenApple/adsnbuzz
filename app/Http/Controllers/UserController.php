@@ -29,9 +29,9 @@ class UserController extends Controller
 	}
 
 	public function search(Request $request){
-		$user = User::where('email',$request->search)
-            ->orWhere('name',$request->search)
-            ->first();
+		$user = User::where('email','like','%'.$request->search.'%')
+            ->orWhere('name','like','%'.$request->search.'%')
+            ->get();
 
 		if(is_null($user)){
 			$arr['status'] = "not-found";

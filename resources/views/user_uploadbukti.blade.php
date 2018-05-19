@@ -59,12 +59,14 @@
 </script>
 <div class="container-fluid">
   <div class="row">
+    <!-- List menu user -->
     <div class="daftarmenu col-md-3">
       @include('layouts.user')
     </div>
 
     <div class="kontenmenu col-md-9 py-4" id="isiform">
       <div class="col-md-10 offset-md-1">
+        <!-- Error Message with PHP 
         @if(session()->has('message'))
 	        @if(session()->get('message')=='File berhasil diupload')
         		<div class="alert alert-success">
@@ -77,9 +79,11 @@
           		{{ session()->get('message') }}
           	</div>
           @endif
-				@endif
+				@endif-->
 
+        <!-- Error Message -->
         <div id="pesan"></div>
+        <!-- Content -->
         <div class="card">
           <div class="card-header">Upload Bukti Bayar</div>
 
@@ -109,6 +113,7 @@
   </div>  
 </div>
 
+<!-- Loading Bar-->
 <div class="overlay">
   <div id="loader" style="display: none;">
   </div>  

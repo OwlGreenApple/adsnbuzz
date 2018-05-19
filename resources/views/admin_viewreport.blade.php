@@ -98,8 +98,9 @@
 
 <div align="center">
   <div class="col-md-11 py-4">
+    <!-- Error message -->
     <div id="pesan" align="left"> </div>
-      
+    <!-- Content -->
     <div class="card">
       <div class="card-header" align="left"> View Report </div>
 
@@ -149,7 +150,8 @@
      </div>    
   </div>
 </div>
-  
+
+<!-- Loading Bar -->  
 <div class="overlay">
   <div id="loader" style="display: none;">
   </div>  

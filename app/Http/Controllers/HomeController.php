@@ -25,13 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-            if(Auth::user()->admin == 1){
-                return view('admin_home');
-            } else {
-                $user = User::find(Auth::user()->id);
-                return view('user_home')->with('user',$user);
-            }
+      if(Auth::check()){
+        if(Auth::user()->admin == 1){
+          return view('admin_home');
+        } else {
+          $user = User::find(Auth::user()->id);
+          return view('user_home')->with('user',$user);
         }
+      }
     }
 }

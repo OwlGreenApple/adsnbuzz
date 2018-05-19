@@ -65,9 +65,7 @@
           } else {
             console.log("success");
             document.getElementById("pesanmodal").innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Kupon berhasil diupdate. </div>';
-
-            //var el = row.parentNode.parentNode.rowIndex;
-            //$('#tabelkupon').find("td").eq(1).html("haloo");
+            $('.id-'+id).html('<td>'+data.isi.kodekupon+'</td><td>'+data.isi.diskon+'</td><td>'+data.isi.tipekupon+'</td><td align="center"><button class="btn btn-primary updatebtn" data-toggle="modal" data-target="#modalKupon" data-kode="'+data.isi.kodekupon+'" data-diskon="'+data.isi.diskon+'" data-tipe="'+data.isi.tipekupon+'" data-id="'+data.isi.id+'" data-action="update">Update</td><td align="center"><button class="btn btn-danger" onclick="deleteData('+data.isi.id+',this)">Delete</td>');
           }
         }
       });
@@ -136,8 +134,15 @@
   }
 
   $(document).ready(function() {
-    //set field value berdasarkan row data
+
+    $("#myTable").tablesorter({
+      headers: {
+        3: { sorter:false },
+      }
+    }); 
+
     $("#modalKupon").on("show.bs.modal", function(e) {
+      document.getElementById("pesanmodal").innerHTML='';
       var action = $(e.relatedTarget).data('action');
 
       if(action=="tambah"){
@@ -149,11 +154,12 @@
         document.getElementById("foot").innerHTML = '<button type="button" class="btn btn-primary" onclick="saveData()"> Tambah </button><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
       } else {
         console.log("update");
+        var row = $(e.relatedTarget).closest("tr");
         var kode = $(e.relatedTarget).data('kode');
         var diskon = $(e.relatedTarget).data('diskon');
         var tipe = $(e.relatedTarget).data('tipe');
         var id = $(e.relatedTarget).data('id');
-
+        //console.log(id);
         $(this).find('#kupon').val(kode);
         $(this).find('#diskon').val(diskon);
         $(this).find('#tipe').val(tipe);
@@ -173,12 +179,28 @@
   });
 </script>
 
+<style type="text/css">
+  th.header {   
+    background-image: url("design/sorter.png");
+    cursor: pointer; 
+    background-repeat: no-repeat; 
+    background-position: center right 5px; 
+  }
+  th.headerSortUp { 
+    background-image: url("design/sorterdesc.png"); 
+    background-color: #5496d8; 
+  }  
+  th.headerSortDown { 
+    background-image: url("design/sorterasc.png"); 
+    background-color: #5496d8; 
+} 
+</style>
 <div class="container" id="isiform">
   <div class="row justify-content-center">
     <div class="col-md-8 py-4">
-      <!--Error Message-->
+      <!-- Error Message -->
       <div id="pesan"> </div>
-      <!--Form-->
+      <!-- Content -->
       <div class="card">
         <div class="card-header">Coupon Management</div>
 
@@ -197,23 +219,21 @@
           </form>
                     
           <div class="tabel">
-            <table class="table table-striped table-bordered" id="tabel">
+            <table class="tablesorter table table-striped table-bordered" id="myTable">
               <thead style="text-align: center;">
-                <tr>
-                  <th>Kode Kupon</th>
-                  <th>Diskon</th>
-                  <th>Tipe Kupon</th>
-                  <th colspan="2">Edit</th>
-                </tr>
+                <th>Kode Kupon</th>
+                <th>Diskon</th>
+                <th>Tipe Kupon</th>
+                <th colspan="2">Edit</th>
               </thead>
 
               <tbody id="tabelkupon">
                 @foreach ($coupons as $coupon)
-                  <tr>
+                  <tr class="id-{{$coupon->id}}">
                     <td>{{ $coupon->kodekupon }}</td>
                     <td>{{ $coupon->diskon }}</td>
                     <td>{{ $coupon->tipekupon }}</td>
-                    <td align="center"><button class="btn btn-primary" data-toggle="modal" data-target="#modalKupon" data-kode="{{ $coupon->kodekupon }}" data-diskon="{{ $coupon->diskon }}" data-tipe="{{ $coupon->tipekupon }}" data-id="{{ $coupon->id }}" data-action="update">Update
+                    <td align="center"><button class="btn btn-primary updatebtn" data-toggle="modal" data-target="#modalKupon" data-kode="{{ $coupon->kodekupon }}" data-diskon="{{ $coupon->diskon }}" data-tipe="{{ $coupon->tipekupon }}" data-id="{{ $coupon->id }}" data-action="update">Update
                     </td>
                     <td align="center"><button class="btn btn-danger" onclick="deleteData({{ $coupon->id }},this)">Delete</td>
                   </tr>
@@ -228,7 +248,7 @@
   </div>
 </div>
 
-<!-- Modal Tambah Kupon -->
+<!-- Modal Kupon -->
 <div class="modal fade" id="modalKupon" role="dialog">
   <div class="modal-dialog">
     

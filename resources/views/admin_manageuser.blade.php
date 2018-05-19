@@ -49,8 +49,9 @@
 <div class="container py-4" id="isiform">
   <div class="row justify-content-center">
     <div class="col-md-12">
+      <!-- Error message -->
       <div id="pesan"> </div>
-      
+      <!-- Content -->
       <div class="card">
         <div class="card-header">User Management</div>
 
@@ -62,7 +63,7 @@
             </div>  
           </form>-->
 
-          <table class="table table-striped table-bordered" id="myTable" class="tablesorter">
+          <table class="table table-striped table-bordered" id="myTable">
             <thead align="center">
               <th>User ID</th>
               <th>Name</th>
@@ -109,6 +110,7 @@
   </div>
 </div>
 
+<!-- Loading Bar -->
 <div class="overlay">
   <div id="loader" style="display: none;">
   </div>  

@@ -1,9 +1,10 @@
 <script type="text/javascript">
+  //Fungsi logout untuk user
 	function logout(){
 		if(confirm("Are you sure want to logout?")) {
-        	event.preventDefault();
-            document.getElementById('logout-form').submit();
-        }
+      event.preventDefault();
+      document.getElementById('logout-form').submit();
+    }
 	}
 </script>
 
@@ -12,6 +13,7 @@
 </div>
 <div class="row justify-content-center">
 	<div class="column">
+    <!-- Menu Home -->
 		<?php if(url()->current() == url('/')) { ?>
 			<a href="{{ url('/') }}"><img src="{{ asset('design/home-button.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
@@ -21,6 +23,7 @@
 	</div>
 
 	<div class="column">
+    <!-- Menu Max Spend -->
 		<?php if(url()->current() == url('/maxspend')) { ?>
 			<a href="{{ url('/maxspend') }}"><img src="{{ asset('design/max-spend.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
@@ -35,6 +38,7 @@
 	</div>
 	
 	<div class="column">
+    <!-- Menu Report -->
 		<?php if(url()->current() == url('/report-user')) { ?>
 			<a href="{{ url('/report-user') }}"><img src="{{ asset('design/report.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
@@ -46,6 +50,7 @@
 
 <div class="row justify-content-center">
 	<div class="column">
+    <!-- Menu Deposit -->
 		<?php if(url()->current() == url('/order')) { ?>
 			<a href="{{ url('/order') }}"><img src="{{ asset('design/deposit.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
@@ -55,6 +60,7 @@
 	</div>
 
 	<div class="column">
+    <!-- Menu Confirm Payment -->
 		<?php if(strpos(url()->current(),'confirm-user')) { ?>
 			<a href="{{ url('/confirm-user') }}"><img src="{{ asset('design/confirm-payment.png') }}" class="tombolmenu"></a>
 		<?php } else { ?>
@@ -64,19 +70,20 @@
 	</div>
 
 	<div class="column">
+    <!-- Menu Logout -->
 		@if (Session::has('hasClonedUser'))
-            <a href="#" onclick="event.preventDefault(); document.getElementById('cloneuser-form').submit();">
-            	<img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
-            </a>
-        @else 
+      <a href="#" onclick="event.preventDefault(); document.getElementById('cloneuser-form').submit();">
+        <img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
+      </a>
+    @else 
 			<a href="{{ route('logout') }}" onclick="logout()">
-	        	<img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
-	        </a>
-	    @endif
+	      <img src="{{ asset('design/logout-button-hover.png') }}" class="tombolmenu">
+	    </a>
+	  @endif
 		<p class="menu">Logout</p>
 	</div>
 
 	<form id="cloneuser-form" action="{{ url('manage-user/login/'.$user->id) }}" method="post">
-        @csrf
-    </form>
+    @csrf
+  </form>
 </div>

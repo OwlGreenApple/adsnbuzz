@@ -139,8 +139,9 @@
 <div class="container py-4" id="isiform">
   <div class="row justify-content-center">
     <div class="col-md-13">
+      <!-- Error message-->
       <div id="pesan"> </div>
-
+      <!-- Content -->
       <div class="card">
         <div class="card-header menuheader">Confirm Payment</div>
 
@@ -208,6 +209,7 @@
   </div>
 </div>
 
+<!-- Loading bar -->
 <div class="overlay">
   <div id="loader" style="display: none;">
   </div>  
