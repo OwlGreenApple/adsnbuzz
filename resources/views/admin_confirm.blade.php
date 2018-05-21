@@ -92,28 +92,32 @@
             document.getElementById("pesan").innerHTML = '';
 
             var trHTML = '';
-	          trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.user_id + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.totalharga + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.opsibayar + '</td>';
-	          
-            if(data.url==null){
-		          trHTML += '<td align="center"> - </td>';
-		        } else {
-		          trHTML += '<td align="center"><a class="popup-newWindow" href="' + data.url + '">View</a></td>';
-		        }
+            console.log(data);
+            $.each(data.isi, function (i, item) {
+              trHTML += '<tr><td>' + item.tgl_order + '</td><td>' + item.email + '</td><td>' + item.no_order + '</td><td>' + item.jml_order + '</td><td>' + item.totalharga + '</td><td>' + item.kodekupon + '</td><td>' + item.opsibayar + '</td>';
 
-		        if(data.isi.konfirmasi==0){
-		          trHTML += '<td align="center"><button type="button" class="btn btn-primary confirm" onclick="konfirmasi(' + data.isi.id + ')" data="'+ data.isi.id +'"> Confirm </button></td>';
-		        } else if (data.isi.konfirmasi==2) {
-		          trHTML += '<td align="center"><button type="button" id="confirmdis" class="btn btn-primary disabled"> Confirm </button></td>';
-		        } else {
-		          trHTML += '<td align="center"><button type="button" class="btn btn-primary unconfirm" onclick="unkonfirmasi('+ data.isi.id +')" data="'+ data.isi.id +'"> Unconfirm </button></td>';
-		        }
-		              	
-		        if(data.isi.konfirmasi!=2){
-		          trHTML += '<td align="center"><button type="button" class="btn btn-danger reject" onclick="rejectt('+ data.isi.id +')" data="'+data.isi.id+'"> Reject </button></td>';
-		        } else {
-		          trHTML += '<td align="center"><button type="button" class="btn btn-primary unreject" onclick="unrejectt('+ data.isi.id +')" data="'+ data.isi.id +'"> Unreject </button></td>';
-		        }
+              if(item.buktibayar==null){
+                trHTML += '<td align="center"> - </td>';
+              } else {
+                console.log(item.buktibayar);
+                trHTML += '<td align="center"><a class="popup-newWindow" href="<?php echo url('/'); ?>' +'/'+ item.buktibayar +'">View</a></td>';
+              }
 
+              if(item.konfirmasi==0){
+                trHTML += '<td align="center"><button type="button" class="btn btn-primary confirm" onclick="konfirmasi(' + item.id + ')" data="'+ item.id +'"> Confirm </button></td>';
+              } else if (item.konfirmasi==2) {
+                trHTML += '<td align="center"><button type="button" id="confirmdis" class="btn btn-primary disabled"> Confirm </button></td>';
+              } else {
+                trHTML += '<td align="center"><button type="button" class="btn btn-primary unconfirm" onclick="unkonfirmasi('+ item.id +')" data="'+ item.id +'"> Unconfirm </button></td>';
+              }
+                      
+              if(item.konfirmasi!=2){
+                trHTML += '<td align="center"><button type="button" class="btn btn-danger reject" onclick="rejectt('+ item.id +')" data="'+item.id+'"> Reject </button></td>';
+              } else {
+                trHTML += '<td align="center"><button type="button" class="btn btn-primary unreject" onclick="unrejectt('+ item.id +')" data="'+ item.id +'"> Unreject </button></td>';
+              }
+            });
+            
             document.getElementById("tabelorder").innerHTML = trHTML;;
             console.log(trHTML);
           }

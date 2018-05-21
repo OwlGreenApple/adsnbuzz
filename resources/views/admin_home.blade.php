@@ -14,7 +14,7 @@
             </div>
           @endif
 
-          Hi, <b>{{ Auth::user()->name }}</b>!<br>
+          Hai, <b>{{ Auth::user()->name }}</b>!<br>
           Anda login sebagai Admin!
         </div>
       </div>

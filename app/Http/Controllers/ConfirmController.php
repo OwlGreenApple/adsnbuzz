@@ -35,20 +35,29 @@ class ConfirmController extends Controller
 
   //Mencari order berdasarkan no order di menu konfirmasi pembayaran (admin+user)
   public function searchorder(Request $request){
-    $order = Order::where("no_order",'like','%'.$request->search.'%')->get();
+    if(Auth::user()->admin=='0'){
+      $order = Order::where("no_order",'like','%'.$request->search.'%')->get();
+    } else {
+      $order = DB::table('orders')
+              ->join('users','orders.user_id','=','users.id')
+              ->select('orders.*','users.email')
+              ->where("orders.no_order",'like','%'.$request->search.'%')
+              ->get();
+    }
+
     if (is_null($order)){
       $arr['status'] = "not-found";
       $arr['isi'] = "";
-      $arr['url'] = "";
     } else {
       $arr['status'] = "found";
       $arr['isi'] = $order;
-      if($order->buktibayar==null){
+      
+      /*if($order->buktibayar==null){
         $arr['url'] = null;
       } else {
         //$arr['url'] = url(Storage::url($order->buktibayar));
         $arr['url'] = url($order->buktibayar);
-      }
+      }*/
     }
     return $arr;
   }

@@ -118,10 +118,13 @@
             console.log("success");
             $('#tabelkupon').empty();
             document.getElementById("pesan").innerHTML = '';
-
+            console.log(data.isi);
             var trHTML = '';
-            trHTML += '<tr><td>' + data.isi.kodekupon + '</td><td>' + data.isi.diskon + '</td><td>' + data.isi.tipekupon + '</td><td align="center"><form action="<?php echo url('/coupon'); ?>' +'/'+ data.isi.id +'/edit"><button class="btn btn-primary">Update</form></td><td align="center"><button class="btn btn-danger" onclick="deleteData('+ data.isi.id +',this)">Delete</td></tr>';
+            $.each(data.isi, function (i, item) {
+              trHTML += '<tr><td>'+item.kodekupon+'</td><td>'+item.diskon+'</td><td>'+item.tipekupon+'</td><td align="center"><button class="btn btn-primary updatebtn" data-toggle="modal" data-target="#modalKupon" data-kode="'+item.kodekupon+'" data-diskon="'+item.diskon+'" data-tipe="'+item.tipekupon+'" data-id="'+item.id+'" data-action="update">Update</td><td align="center"><button class="btn btn-danger" onclick="deleteData('+item.id+',this)">Delete</td></tr>';
 
+            });
+            
             document.getElementById("tabelkupon").innerHTML = trHTML;;
             console.log(trHTML);
           }

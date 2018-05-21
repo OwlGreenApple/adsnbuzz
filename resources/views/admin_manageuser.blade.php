@@ -20,8 +20,9 @@
             document.getElementById("pesan").innerHTML = '';
 
             var trHTML = '';
-            trHTML += '<tr><td>' + data.isi.id + '</td><td>' + data.isi.name + '</td><td>' + data.isi.email + '</td><td>' + data.isi.spend_month + '</td><td>' + data.isi.deposit + '</td><td align="center"><form action="<?php echo url('/report'); ?>' +'/'+ data.isi.id +'"> @csrf<button type="submit" class="btn btn-primary">Upload</button></form></td><td align="center"><form action="<?php echo url('/manage-user/login'); ?>' +'/'+ data.isi.id +'" method="post"> @csrf<button type="submit" class="btn btn-primary">Login</button></form></td></tr>';
-
+            $.each(data.isi, function (i, item) {
+              trHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.email + '</td><td>' + item.spend_month + '</td><td>' + item.deposit + '</td><td align="center"><form action="<?php echo url('/report'); ?>' +'/'+ item.id +'"> @csrf<button type="submit" class="btn btn-primary">Upload</button></form></td><td><form action="<?php echo url('/viewreport'); ?>' +'/'+ item.id +'"> @csrf <button type="submit" class="btn btn-primary">View</button></form></td><td align="center"><form action="<?php echo url('/manage-user/login'); ?>' +'/'+ item.id +'" method="post"> @csrf<button type="submit" class="btn btn-primary">Login</button></form></td></tr>';
+            });
             document.getElementById("tabeluser").innerHTML = trHTML;;
             console.log(trHTML);
           }
@@ -56,12 +57,12 @@
         <div class="card-header">User Management</div>
 
         <div class="card-body">
-          <!--<form>
+          <form>
             <div class="form-group row">
               <input type="text" class="form-control col-md-4" name="search" id="search" placeholder="Masukkan email/nama user..." style="margin-left: 14px;">
               <button type="button" class="btn btn-primary" style="margin-left:10px;" onclick="cari()"> Cari </button>
             </div>  
-          </form>-->
+          </form>
 
           <table class="table table-striped table-bordered" id="myTable">
             <thead align="center">

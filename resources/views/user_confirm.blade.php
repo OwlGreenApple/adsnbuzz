@@ -26,23 +26,23 @@
             document.getElementById("pesan").innerHTML = '';
 
             var trHTML = '';
-		        trHTML += '<tr><td>' + data.isi.tgl_order + '</td><td>' + data.isi.no_order + '</td><td>' + data.isi.jml_order + '</td><td>' + data.isi.kodekupon + '</td><td>' + data.isi.totalharga + '</td><td align="center"><form action="<?php echo url('/confirm-user'); ?>' +'/'+ data.isi.id +'"><button type="submit" class="btn btn-primary"> Upload </button></form></td>';
+            $.each(data.isi, function (i, item) {
+  		        trHTML += '<tr><td>' + item.tgl_order + '</td><td>' + item.no_order + '</td><td>' + item.jml_order + '</td><td>' + item.kodekupon + '</td><td>' + item.totalharga + '</td><td align="center"><form action="<?php echo url('/confirm-user'); ?>' +'/'+ item.id +'"><button type="submit" class="btn btn-primary"> Upload </button></form></td>';
 
-		        console.log(data.url);
-		        if(data.url==null){
-		          trHTML += '<td align="center"> - </td>';
-		        } else {
-		          trHTML += '<td align="center"><a class="popup-newWindow" href="' + data.url + '">View</a></td>';
-		        }
+  		        if(item.buktibayar==null){
+  		          trHTML += '<td align="center"> - </td>';
+  		        } else {
+  		          trHTML += '<td align="center"><a class="popup-newWindow" href="<?php echo url('/'); ?>' +'/'+ item.buktibayar +'">View</a></td>';
+  		        }
 
-		        if(data.isi.konfirmasi==0){
-		          trHTML += '<td style="color:red;">Belum di konfirmasi</td></tr>';
-		        } else if (data.isi.konfirmasi==1){
-		          trHTML += '<td style="color:green;">Sudah di konfirmasi</td>';
-		        } else {
-		          trHTML += '<td style="color:red;">Pesanan ditolak</td>';
-		        }
-		            
+  		        if(item.konfirmasi==0){
+  		          trHTML += '<td style="color:red;">Belum di konfirmasi</td></tr>';
+  		        } else if (item.konfirmasi==1){
+  		          trHTML += '<td style="color:green;">Sudah di konfirmasi</td>';
+  		        } else {
+  		          trHTML += '<td style="color:red;">Pesanan ditolak</td>';
+  		        }
+		        });      
             document.getElementById("tabelorder").innerHTML = trHTML;;
             console.log(trHTML);
           }
